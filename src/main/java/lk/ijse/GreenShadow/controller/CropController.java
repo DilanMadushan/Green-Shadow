@@ -66,5 +66,11 @@ public class CropController {
         return cropService.getAllCrop();
     }
 
+    @GetMapping(value = "{id}")
+    public CropDTO findCrop(@PathVariable("id") String id){
+        return cropService.findCrop(id);
+    }
+
+
 
 }
