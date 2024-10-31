@@ -4,11 +4,13 @@ import lk.ijse.GreenShadow.dto.CropDTO;
 import lk.ijse.GreenShadow.service.CropService;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -59,4 +61,10 @@ public class CropController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping
+    public List<CropDTO> getAllCrop(){
+        return cropService.getAllCrop();
+    }
+
+
 }

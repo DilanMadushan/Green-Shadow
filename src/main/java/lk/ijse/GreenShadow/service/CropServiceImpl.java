@@ -10,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -39,16 +41,26 @@ public class CropServiceImpl implements CropService{
 
     @Override
     public List<CropDTO> getAllCrop() {
-        return null;
+        List<Crop> finded = cropRepo.findAll();
+        List<CropDTO> dtoList = new ArrayList<>();
+
+        for (Crop crop : finded) {
+            dtoList.add(map.toCropDto(crop));
+        }
+        return dtoList;
     }
 
     @Override
     public CropDTO findCrop(String id) {
+        Optional<Crop> byId = cropRepo.findById(id);
+        if(byId.isPresent()){
+            return map.toCropDto(byId.get());
+        }
         return null;
     }
 
     @Override
     public String getLastIndex() {
-        return null;
+        return cropRepo.lastIndex();
     }
 }
