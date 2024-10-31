@@ -71,6 +71,10 @@ public class CropController {
         return cropService.findCrop(id);
     }
 
+    @GetMapping("/last")
+    public String getLastIndex(){
+        return cropService.getLastIndex();
+    }
 
 
 }
