@@ -4,6 +4,7 @@ import lk.ijse.GreenShadow.dto.CropDTO;
 import lk.ijse.GreenShadow.entity.Crop;
 import lk.ijse.GreenShadow.repository.CropRepo;
 import lk.ijse.GreenShadow.util.Convater.Convater;
+import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lk.ijse.GreenShadow.util.map.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,14 +26,15 @@ public class CropServiceImpl implements CropService{
 
     @Override
     public void updateCrop(CropDTO cropDTO) {
-        Crop foundCrop = cropRepo.findById(cropDTO.getCrop_code()).orElseThrow(() -> new RuntimeException("Crop Not Found"));
+        Crop foundCrop = cropRepo.findById(cropDTO.getCrop_code()).orElseThrow(() -> new NotFoundException("Crop Not Found"));
         Crop update = map.toCropEntity(cropDTO);
         convater.convertCrop(foundCrop,update);
     }
 
     @Override
-    public void deleteCrop(CropDTO cropDTO) {
-
+    public void deleteCrop(String id) {
+        cropRepo.findById(id).orElseThrow(()->new NotFoundException("Crop NotFound"));
+        cropRepo.deleteById(id);
     }
 
     @Override
