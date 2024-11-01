@@ -1,6 +1,7 @@
 package lk.ijse.GreenShadow.entity;
 
 import jakarta.persistence.*;
+import lk.ijse.GreenShadow.util.enums.Category;
 import lombok.*;
 
 import java.util.List;
@@ -19,7 +20,8 @@ public class Crop {
     private String scientific_name;
     @Column(columnDefinition = "LONGTEXT")
     private String crop_image;
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private Category category;
     private String crop_season;
     @ManyToOne
     @JoinColumn(name = "field_code")

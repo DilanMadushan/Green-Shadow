@@ -1,12 +1,18 @@
 package lk.ijse.GreenShadow.service;
 
+import lk.ijse.GreenShadow.Specification.CropSpecification;
 import lk.ijse.GreenShadow.dto.CropDTO;
+import lk.ijse.GreenShadow.dto.FilterCropDto;
 import lk.ijse.GreenShadow.entity.Crop;
 import lk.ijse.GreenShadow.repository.CropRepo;
 import lk.ijse.GreenShadow.util.Convater.Convater;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lk.ijse.GreenShadow.util.map.Map;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,14 +46,20 @@ public class CropServiceImpl implements CropService{
     }
 
     @Override
-    public List<CropDTO> getAllCrop() {
-        List<Crop> finded = cropRepo.findAll();
-        List<CropDTO> dtoList = new ArrayList<>();
+    public List<CropDTO> getAllCrop(FilterCropDto filterCropDto) {
 
-        for (Crop crop : finded) {
-            dtoList.add(map.toCropDto(crop));
+        Pageable pageable = PageRequest.of(filterCropDto.getPage(), filterCropDto.getPerPage());
+        Specification<Crop> specification = CropSpecification.createSpecification(filterCropDto);
+
+        Page<Crop> Resualt = cropRepo.findAll(specification, pageable);
+
+        List<CropDTO> crops = new ArrayList<>();
+
+        for (Crop crop : Resualt) {
+            crops.add(map.toCropDto(crop));
         }
-        return dtoList;
+
+        return crops;
     }
 
     @Override

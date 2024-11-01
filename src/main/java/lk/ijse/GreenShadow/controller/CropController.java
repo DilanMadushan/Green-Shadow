@@ -1,7 +1,9 @@
 package lk.ijse.GreenShadow.controller;
 
 import lk.ijse.GreenShadow.dto.CropDTO;
+import lk.ijse.GreenShadow.dto.FilterCropDto;
 import lk.ijse.GreenShadow.service.CropService;
+import lk.ijse.GreenShadow.util.enums.Category;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -62,8 +64,14 @@ public class CropController {
         }
     }
     @GetMapping
-    public List<CropDTO> getAllCrop(){
-        return cropService.getAllCrop();
+    public List<CropDTO> getAllCrop(
+            @RequestParam(required = false) String data,
+            @RequestParam(required = false) Category category,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int perPage
+            ){
+        FilterCropDto filterCropDto = new FilterCropDto(data,category,page,perPage);
+        return cropService.getAllCrop(filterCropDto);
     }
 
     @GetMapping(value = "{id}")
