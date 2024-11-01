@@ -2,7 +2,7 @@ package lk.ijse.GreenShadow.Specification;
 
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Predicate;
-import lk.ijse.GreenShadow.dto.FilterCropDto;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterCropDto;
 import lk.ijse.GreenShadow.entity.Crop;
 import org.springframework.data.jpa.domain.Specification;
 

@@ -1,7 +1,7 @@
 package lk.ijse.GreenShadow.service;
 
 import lk.ijse.GreenShadow.dto.CropDTO;
-import lk.ijse.GreenShadow.dto.FilterCropDto;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterCropDto;
 
 import java.util.List;
 

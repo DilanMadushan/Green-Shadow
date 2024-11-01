@@ -1,4 +1,4 @@
-package lk.ijse.GreenShadow.dto.filter;
+package lk.ijse.GreenShadow.dto.filter.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

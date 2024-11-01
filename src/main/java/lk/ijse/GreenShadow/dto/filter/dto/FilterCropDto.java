@@ -1,6 +1,6 @@
-package lk.ijse.GreenShadow.dto;
+package lk.ijse.GreenShadow.dto.filter.dto;
 
-import lk.ijse.GreenShadow.dto.filter.BaseFilterDto;
+import lk.ijse.GreenShadow.dto.filter.base.BaseFilterDto;
 import lk.ijse.GreenShadow.util.enums.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;

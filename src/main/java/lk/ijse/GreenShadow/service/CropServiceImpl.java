@@ -2,7 +2,7 @@ package lk.ijse.GreenShadow.service;
 
 import lk.ijse.GreenShadow.Specification.CropSpecification;
 import lk.ijse.GreenShadow.dto.CropDTO;
-import lk.ijse.GreenShadow.dto.FilterCropDto;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterCropDto;
 import lk.ijse.GreenShadow.entity.Crop;
 import lk.ijse.GreenShadow.repository.CropRepo;
 import lk.ijse.GreenShadow.util.Convater.Convater;

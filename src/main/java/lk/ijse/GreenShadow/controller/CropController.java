@@ -1,17 +1,14 @@
 package lk.ijse.GreenShadow.controller;
 
 import lk.ijse.GreenShadow.dto.CropDTO;
-import lk.ijse.GreenShadow.dto.FilterCropDto;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterCropDto;
 import lk.ijse.GreenShadow.service.CropService;
 import lk.ijse.GreenShadow.util.enums.Category;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -22,7 +19,7 @@ public class CropController {
     private final CropService cropService;
     @GetMapping("health")
     public String helthChack(){
-        return "Corp Health";
+        return "All systems are running optimally";
     }
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> saveCrop(@RequestBody CropDTO cropDTO){
