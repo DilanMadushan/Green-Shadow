@@ -25,5 +25,18 @@ public class FieldController {
         return "All systems are running optimally";
     }
 
+    @PostMapping
+    public ResponseEntity<?> saveField(@RequestBody FieldDTO fieldDTO){
+        try {
+            fieldService.saveField(fieldDTO);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }catch (AlradyExsistException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
+    }
 }
