@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -64,7 +65,11 @@ public class FieldServiceImpl implements FieldService {
     }
 
     @Override
-    public CropDTO findField(String id) {
+    public FieldDTO findField(String id) {
+        Optional<Field> byId = fieldRepo.findById(id);
+        if (byId.isPresent()) {
+            return map.toFieldDto(byId.get());
+        }
         return null;
     }
 

@@ -11,6 +11,6 @@ public interface FieldService {
     void updateField(FieldDTO fieldDTO);
     void deleteField(String id);
     List<FieldDTO> getAllField(FilterFieldDto filterFieldDto);
-    CropDTO findField(String id);
+    FieldDTO findField(String id);
     String getLastIndex();
 }

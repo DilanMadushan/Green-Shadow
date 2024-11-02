@@ -85,4 +85,9 @@ public class FieldController {
     public String findLastIndex(){
         return fieldService.getLastIndex();
     }
+
+    @GetMapping(value = "{id}")
+    public FieldDTO findField(@PathVariable("id") String id){
+        return fieldService.findField(id);
+    }
 }
