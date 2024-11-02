@@ -70,6 +70,6 @@ public class FieldServiceImpl implements FieldService {
 
     @Override
     public String getLastIndex() {
-        return null;
+        return fieldRepo.getLastIndex();
     }
 }

@@ -80,4 +80,9 @@ public class FieldController {
         FilterFieldDto filterFieldDto = new FilterFieldDto(data,fieldSize,page,perPage);
         return fieldService.getAllField(filterFieldDto);
     }
+
+    @GetMapping("/last")
+    public String findLastIndex(){
+        return fieldService.getLastIndex();
+    }
 }
