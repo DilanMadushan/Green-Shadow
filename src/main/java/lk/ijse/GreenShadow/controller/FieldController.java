@@ -4,6 +4,7 @@ import lk.ijse.GreenShadow.dto.FieldDTO;
 import lk.ijse.GreenShadow.dto.filter.dto.FilterFieldDto;
 import lk.ijse.GreenShadow.service.FieldService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
+import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -38,5 +39,19 @@ public class FieldController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    @DeleteMapping(value = "{id}")
+    public ResponseEntity<?> deleteField(@PathVariable("id") String id){
+        try {
+            fieldService.deleteField(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (NotFoundException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

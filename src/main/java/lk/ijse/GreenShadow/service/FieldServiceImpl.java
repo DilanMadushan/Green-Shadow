@@ -5,6 +5,7 @@ import lk.ijse.GreenShadow.dto.FieldDTO;
 import lk.ijse.GreenShadow.entity.Field;
 import lk.ijse.GreenShadow.repository.FieldRepo;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
+import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lk.ijse.GreenShadow.util.map.Map;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,8 @@ public class FieldServiceImpl implements FieldService {
 
     @Override
     public void deleteField(String id) {
-
+        fieldRepo.findById(id).orElseThrow(() -> new NotFoundException("Field Not Found"));
+        fieldRepo.deleteById(id);
     }
 
     @Override
