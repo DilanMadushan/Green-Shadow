@@ -69,4 +69,15 @@ public class FieldController {
         }
 
     }
+
+    @GetMapping
+    public List<FieldDTO> getAllFields(
+            @RequestParam(required = false) String data,
+            @RequestParam(defaultValue = "0.0") Double fieldSize,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int perPage
+    ){
+        FilterFieldDto filterFieldDto = new FilterFieldDto(data,fieldSize,page,perPage);
+        return fieldService.getAllField(filterFieldDto);
+    }
 }

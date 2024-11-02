@@ -18,9 +18,9 @@ public class Field {
     private String field_Name;
     private String field_location;
     private double extent_size_of_field;
-    @OneToMany(mappedBy = "field")
+    @OneToMany(mappedBy = "field",fetch = FetchType.LAZY)
     private List<Crop> crops;
-    @OneToMany(mappedBy = "field" )
+    @OneToMany(mappedBy = "field",fetch = FetchType.LAZY)
     private List<MonitoringLog> log;
     @Column(columnDefinition = "LONGTEXT")
     private String field_image_1;

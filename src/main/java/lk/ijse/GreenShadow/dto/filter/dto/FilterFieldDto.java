@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class FilterFieldDto extends BaseFilterDto {
     private String data;
-    private double fieldSize;
+    private Double fieldSize;
 
     public FilterFieldDto( String data, double fieldSize, int page, int perPage) {
         super(page, perPage);
