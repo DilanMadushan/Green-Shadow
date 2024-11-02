@@ -2,18 +2,27 @@ package lk.ijse.GreenShadow.service;
 
 import lk.ijse.GreenShadow.dto.CropDTO;
 import lk.ijse.GreenShadow.dto.FieldDTO;
-import lk.ijse.GreenShadow.dto.filter.dto.FilterFieldDto;
+import lk.ijse.GreenShadow.entity.Field;
+import lk.ijse.GreenShadow.repository.FieldRepo;
+import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
+import lk.ijse.GreenShadow.util.map.Map;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class FieldServiceImpl implements FieldService {
+    private final FieldRepo fieldRepo;
+    private final Map map;
     @Override
     public void saveField(FieldDTO fieldDTO) {
-
+        if(fieldRepo.existsById(fieldDTO.getField_code())) throw new AlradyExsistException("Field Alrady Exsist");
+        fieldRepo.save(map.toFieldEntity(fieldDTO));
     }
 
     @Override
@@ -27,8 +36,14 @@ public class FieldServiceImpl implements FieldService {
     }
 
     @Override
-    public List<CropDTO> getAllField(FilterFieldDto filterFieldDto) {
-        return null;
+    public List<FieldDTO> getAllField() {
+        List<Field> all = fieldRepo.findAll();
+        List<FieldDTO> set = new ArrayList<>();
+
+        for (Field field : all) {
+            set.add(map.toFieldDto(field));
+        }
+        return set;
     }
 
     @Override

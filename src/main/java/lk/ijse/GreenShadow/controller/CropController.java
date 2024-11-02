@@ -4,6 +4,7 @@ import lk.ijse.GreenShadow.dto.CropDTO;
 import lk.ijse.GreenShadow.dto.filter.dto.FilterCropDto;
 import lk.ijse.GreenShadow.service.CropService;
 import lk.ijse.GreenShadow.util.enums.Category;
+import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
@@ -28,7 +29,10 @@ public class CropController {
             cropService.saveCrop(cropDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
 
-        }catch (Exception e){
+        }catch (AlradyExsistException e){
+          e.printStackTrace();
+          return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -6,6 +6,7 @@ import lk.ijse.GreenShadow.dto.filter.dto.FilterCropDto;
 import lk.ijse.GreenShadow.entity.Crop;
 import lk.ijse.GreenShadow.repository.CropRepo;
 import lk.ijse.GreenShadow.util.Convater.Convater;
+import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lk.ijse.GreenShadow.util.map.Map;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ public class CropServiceImpl implements CropService{
     private final Convater convater;
     @Override
     public void saveCrop(CropDTO cropDTO) {
+        if(cropRepo.existsById(cropDTO.getCrop_code())) throw new AlradyExsistException("Crop Alrady Exsist");
         cropRepo.save(map.toCropEntity(cropDTO));
     }
 

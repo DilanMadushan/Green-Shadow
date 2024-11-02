@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.awt.*;
 import java.util.List;
 
 @AllArgsConstructor
@@ -16,7 +15,7 @@ import java.util.List;
 public class FieldDTO {
     private String field_code;
     private String field_Name;
-    private Point field_location;
+    private String field_location;
     private double extent_size_of_field;
     private List<Crop> crops;
     private List<MonitoringLog> log;

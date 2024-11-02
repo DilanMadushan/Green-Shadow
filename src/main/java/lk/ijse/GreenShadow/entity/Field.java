@@ -3,7 +3,6 @@ package lk.ijse.GreenShadow.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.awt.*;
 import java.util.List;
 
 @AllArgsConstructor
@@ -17,8 +16,7 @@ public class Field {
     @Id
     private String field_code;
     private String field_Name;
-    @Column(columnDefinition="Point")
-    private Point field_location;
+    private String field_location;
     private double extent_size_of_field;
     @OneToMany(mappedBy = "field")
     private List<Crop> crops;
