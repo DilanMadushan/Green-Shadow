@@ -54,4 +54,19 @@ public class FieldController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PatchMapping
+    public ResponseEntity<?> updateField(@RequestBody FieldDTO fieldDTO){
+        try {
+            fieldService.updateField(fieldDTO);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (NotFoundException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 }

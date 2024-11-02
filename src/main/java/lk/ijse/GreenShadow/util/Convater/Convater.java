@@ -25,7 +25,7 @@ public class Convater {
 
     public Field convertField(Field foundCField, Field update){
         foundCField.setField_Name(update.getField_Name());
-        foundCField.setField_Name(update.getField_Name());
+        foundCField.setExtent_size_of_field(update.getExtent_size_of_field());
         foundCField.setField_location(update.getField_location());
         foundCField.setField_image_1(update.getField_image_1());
         foundCField.setField_image_2(update.getField_image_2());

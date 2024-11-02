@@ -4,6 +4,7 @@ import lk.ijse.GreenShadow.dto.CropDTO;
 import lk.ijse.GreenShadow.dto.FieldDTO;
 import lk.ijse.GreenShadow.entity.Field;
 import lk.ijse.GreenShadow.repository.FieldRepo;
+import lk.ijse.GreenShadow.util.Convater.Convater;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lk.ijse.GreenShadow.util.map.Map;
@@ -20,6 +21,7 @@ import java.util.List;
 public class FieldServiceImpl implements FieldService {
     private final FieldRepo fieldRepo;
     private final Map map;
+    private final Convater convater;
     @Override
     public void saveField(FieldDTO fieldDTO) {
         if(fieldRepo.existsById(fieldDTO.getField_code())) throw new AlradyExsistException("Field Alrady Exsist");
@@ -28,7 +30,9 @@ public class FieldServiceImpl implements FieldService {
 
     @Override
     public void updateField(FieldDTO fieldDTO) {
-
+        Field found = fieldRepo.findById(fieldDTO.getField_code()).orElseThrow(() -> new NotFoundException("Field Not Found"));
+        Field update = map.toFieldEntity(fieldDTO);
+        convater.convertField(found,update);
     }
 
     @Override
