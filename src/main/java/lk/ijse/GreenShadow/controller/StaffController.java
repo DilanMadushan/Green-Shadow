@@ -75,4 +75,9 @@ public class StaffController {
         return staffService.getAllStaff(filterStuffDto);
     }
 
+    @GetMapping("/last")
+    public String findLastIndex(){
+        return staffService.getLastIndex();
+    }
+
 }

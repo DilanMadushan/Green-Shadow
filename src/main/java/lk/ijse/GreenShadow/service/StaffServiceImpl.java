@@ -69,6 +69,6 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public String getLastIndex() {
-        return null;
+        return staffRepo.findLastIndex();
     }
 }
