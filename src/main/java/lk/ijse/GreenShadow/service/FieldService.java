@@ -1,6 +1,5 @@
 package lk.ijse.GreenShadow.service;
 
-import lk.ijse.GreenShadow.dto.CropDTO;
 import lk.ijse.GreenShadow.dto.FieldDTO;
 import lk.ijse.GreenShadow.dto.filter.dto.FilterFieldDto;
 

@@ -1,17 +1,11 @@
 package lk.ijse.GreenShadow.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.OneToMany;
 import lk.ijse.GreenShadow.entity.MonitoringLog;
-import lk.ijse.GreenShadow.entity.Vehicle;
 import lk.ijse.GreenShadow.util.enums.Designation;
 import lk.ijse.GreenShadow.util.enums.Gender;
 import lk.ijse.GreenShadow.util.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;

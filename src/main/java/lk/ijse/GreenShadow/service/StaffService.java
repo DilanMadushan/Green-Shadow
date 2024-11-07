@@ -10,6 +10,6 @@ public interface StaffService {
     void updateStaff(StaffDto staffDto);
     void deleteStaff(String id);
     List<StaffDto> getAllStaff(FilterStuffDto filterStuffDto);
-    String findStaff(String id);
+    StaffDto findStaff(String id);
     String getLastIndex();
 }

@@ -2,18 +2,10 @@ package lk.ijse.GreenShadow.Specification;
 
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Predicate;
-import lk.ijse.GreenShadow.dto.filter.dto.FilterFieldDto;
 import lk.ijse.GreenShadow.dto.filter.dto.FilterStuffDto;
-import lk.ijse.GreenShadow.entity.Field;
-import lk.ijse.GreenShadow.entity.MonitoringLog;
 import lk.ijse.GreenShadow.entity.Staff;
-import lk.ijse.GreenShadow.util.enums.Designation;
-import lk.ijse.GreenShadow.util.enums.Gender;
-import lk.ijse.GreenShadow.util.enums.Role;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.util.Date;
-import java.util.List;
 
 public class StaffSpecification {
     public static Specification<Staff> createSpecification(FilterStuffDto filterStuffDto){

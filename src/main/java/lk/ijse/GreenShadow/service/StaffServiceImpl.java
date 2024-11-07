@@ -1,10 +1,8 @@
 package lk.ijse.GreenShadow.service;
 
-import lk.ijse.GreenShadow.Specification.FieldSpecification;
 import lk.ijse.GreenShadow.Specification.StaffSpecification;
 import lk.ijse.GreenShadow.dto.StaffDto;
 import lk.ijse.GreenShadow.dto.filter.dto.FilterStuffDto;
-import lk.ijse.GreenShadow.entity.Field;
 import lk.ijse.GreenShadow.entity.Staff;
 import lk.ijse.GreenShadow.repository.StaffRepo;
 import lk.ijse.GreenShadow.util.Convater.Convater;
@@ -21,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -63,7 +62,12 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public String findStaff(String id) {
+    public StaffDto findStaff(String id) {
+        Optional<Staff> byId = staffRepo.findById(id);
+
+        if (byId.isPresent()) {
+            return map.toStaffDto(byId.get());
+        }
         return null;
     }
 
