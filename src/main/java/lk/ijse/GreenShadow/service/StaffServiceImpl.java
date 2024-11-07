@@ -36,7 +36,8 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public void deleteStaff(String id) {
-
+        staffRepo.findById(id).orElseThrow(()-> new NotFoundException("Member not Found"));
+        staffRepo.deleteById(id);
     }
 
     @Override

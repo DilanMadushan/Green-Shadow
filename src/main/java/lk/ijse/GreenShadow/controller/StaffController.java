@@ -41,6 +41,19 @@ public class StaffController {
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (NotFoundException e){
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping(value = "{id}")
+    public ResponseEntity<?> deleteStaff(@PathVariable("id") String id){
+        try {
+            staffService.deleteStaff(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (NotFoundException e){
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e) {
