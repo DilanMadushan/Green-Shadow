@@ -29,11 +29,4 @@ public class FilterStuffDto extends BaseFilterDto {
         this.role = role;
     }
 
-    public FilterStuffDto(String data, Designation designation, Gender gender, Date joinedDate, Role role) {
-        this.data = data;
-        this.designation = designation;
-        this.gender = gender;
-        this.joinedDate = joinedDate;
-        this.role = role;
-    }
 }
