@@ -11,12 +11,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class FilterFieldDto extends BaseFilterDto {
     private String data;
-    private Double fieldSize;
 
-    public FilterFieldDto( String data, double fieldSize, int page, int perPage) {
+    public FilterFieldDto( String data, int page, int perPage) {
         super(page, perPage);
         this.data = data;
-        this.fieldSize = fieldSize;
     }
 
 }

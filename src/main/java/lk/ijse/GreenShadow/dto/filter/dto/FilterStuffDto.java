@@ -15,18 +15,10 @@ import java.util.Date;
 @Data
 public class FilterStuffDto extends BaseFilterDto {
     private String data;
-    private Designation designation;
-    private Gender gender;
-    private Date joinedDate;
-    private Role role;
 
-    public FilterStuffDto(String data, Designation designation, Gender gender, Date joinedDate, Role role,int page, int perPage) {
+    public FilterStuffDto(String data,int page, int perPage) {
         super(page, perPage);
         this.data = data;
-        this.designation = designation;
-        this.gender = gender;
-        this.joinedDate = joinedDate;
-        this.role = role;
     }
 
 }

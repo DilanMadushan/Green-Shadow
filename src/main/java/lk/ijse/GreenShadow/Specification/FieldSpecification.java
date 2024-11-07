@@ -16,14 +16,13 @@ public class FieldSpecification {
             if(filterFieldDto.getData() !=null && !filterFieldDto.getData().isEmpty()){
                 Expression<String> codeExpression = builder.lower(root.get("field_code"));
                 Expression<String> commonNameExpression = builder.lower(root.get("field_Name"));
+                Expression<String> sizeExpression = builder.lower(builder.toString(root.get("extent_size_of_field")));
                 String lowerSearchTerm = filterFieldDto.getData().toLowerCase();
                 predicate = builder.and(predicate, builder.or(builder.like(codeExpression,"%" + lowerSearchTerm + "%"),
-                        builder.like(commonNameExpression,"%" + lowerSearchTerm + "%")));
+                        builder.like(commonNameExpression,"%" + lowerSearchTerm + "%"),
+                        builder.like(sizeExpression,"%" + lowerSearchTerm + "%")));
             }
 
-            if(filterFieldDto.getFieldSize() !=0.0){
-                predicate = builder.and(predicate, builder.equal(root.get("extent_size_of_field"), filterFieldDto.getFieldSize() ));
-            }
 
             assert query != null;
             query.orderBy(builder.desc(root.get("field_code")));

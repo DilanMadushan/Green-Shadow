@@ -1,6 +1,7 @@
 package lk.ijse.GreenShadow.controller;
 
 import lk.ijse.GreenShadow.dto.StaffDto;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterStuffDto;
 import lk.ijse.GreenShadow.service.StaffService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/staff")
@@ -60,6 +63,16 @@ public class StaffController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping
+    public List<StaffDto> getAllStuff(
+            @RequestParam(required = false) String data,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int perPage
+    ){
+        FilterStuffDto filterStuffDto = new FilterStuffDto(data,page,perPage);
+        return staffService.getAllStaff(filterStuffDto);
     }
 
 }

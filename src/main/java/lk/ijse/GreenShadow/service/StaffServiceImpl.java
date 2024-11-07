@@ -1,7 +1,10 @@
 package lk.ijse.GreenShadow.service;
 
+import lk.ijse.GreenShadow.Specification.FieldSpecification;
+import lk.ijse.GreenShadow.Specification.StaffSpecification;
 import lk.ijse.GreenShadow.dto.StaffDto;
 import lk.ijse.GreenShadow.dto.filter.dto.FilterStuffDto;
+import lk.ijse.GreenShadow.entity.Field;
 import lk.ijse.GreenShadow.entity.Staff;
 import lk.ijse.GreenShadow.repository.StaffRepo;
 import lk.ijse.GreenShadow.util.Convater.Convater;
@@ -9,9 +12,14 @@ import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lk.ijse.GreenShadow.util.map.Map;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -42,7 +50,16 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public List<StaffDto> getAllStaff(FilterStuffDto filterStuffDto) {
-        return null;
+        Pageable pageable = PageRequest.of(filterStuffDto.getPage(), filterStuffDto.getPerPage());
+        Specification<Staff> specification = StaffSpecification.createSpecification(filterStuffDto);
+
+        Page<Staff> resualt = staffRepo.findAll(specification,pageable);
+        List<StaffDto> staff = new ArrayList<>();
+
+        for (Staff staffSet : resualt) {
+            staff.add(map.toStaffDto(staffSet));
+        }
+        return staff;
     }
 
     @Override
