@@ -79,4 +79,8 @@ public class VehicleController{
     public VehicleDTO findVehicle(@PathVariable("id")String id){
         return vehicleService.findVehicle(id);
     }
+    @GetMapping("/last")
+    public String findLastIndex(){
+        return vehicleService.getLastIndex();
+    }
 }

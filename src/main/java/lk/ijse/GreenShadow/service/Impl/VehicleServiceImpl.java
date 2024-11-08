@@ -77,6 +77,6 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public String getLastIndex() {
-        return null;
+        return vehicleRepo.findLastIndex();
     }
 }
