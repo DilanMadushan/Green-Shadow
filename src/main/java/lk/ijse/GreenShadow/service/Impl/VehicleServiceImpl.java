@@ -2,19 +2,25 @@ package lk.ijse.GreenShadow.service.Impl;
 
 import lk.ijse.GreenShadow.dto.VehicleDTO;
 import lk.ijse.GreenShadow.dto.filter.dto.FilterVehicleDTO;
+import lk.ijse.GreenShadow.entity.Vehicle;
 import lk.ijse.GreenShadow.repository.VehicleRepo;
 import lk.ijse.GreenShadow.service.VehicleService;
+import lk.ijse.GreenShadow.util.Convater.Convater;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
+import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lk.ijse.GreenShadow.util.map.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class VehicleServiceImpl implements VehicleService {
     private final VehicleRepo vehicleRepo;
     private final Map map;
+    private final Convater convater;
     @Override
     public void saveVehicle(VehicleDTO vehicleDTO) {
         if (vehicleRepo.existsById(vehicleDTO.getVehicle_code())) throw new AlradyExsistException("Vehicle Alrady Exsist");
@@ -23,7 +29,9 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public void updateVehicle(VehicleDTO vehicleDTO) {
-
+        Vehicle found = vehicleRepo.findById(vehicleDTO.getVehicle_code()).orElseThrow(() -> new NotFoundException("Vehicle not Found"));
+        Vehicle update = map.toVehicleEntity(vehicleDTO);
+        convater.convertVehicle(found,update);
     }
 
     @Override
