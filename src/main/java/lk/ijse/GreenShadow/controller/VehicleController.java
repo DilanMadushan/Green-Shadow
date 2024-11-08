@@ -1,6 +1,7 @@
 package lk.ijse.GreenShadow.controller;
 
 import lk.ijse.GreenShadow.dto.VehicleDTO;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterVehicleDTO;
 import lk.ijse.GreenShadow.service.VehicleService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
@@ -8,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -60,5 +63,15 @@ public class VehicleController{
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping
+    public List<VehicleDTO> gelALlVehicle(
+            @RequestParam(required = false) String data,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int perPage
+    ){
+        FilterVehicleDTO filterVehicleDTO = new FilterVehicleDTO(data,page,perPage);
+        return vehicleService.getAllVehicles(filterVehicleDTO);
     }
 }

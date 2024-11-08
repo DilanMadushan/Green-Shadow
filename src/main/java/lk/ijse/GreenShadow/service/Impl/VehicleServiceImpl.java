@@ -1,7 +1,10 @@
 package lk.ijse.GreenShadow.service.Impl;
 
+import lk.ijse.GreenShadow.Specification.StaffSpecification;
+import lk.ijse.GreenShadow.Specification.VehicleSpecifiction;
 import lk.ijse.GreenShadow.dto.VehicleDTO;
 import lk.ijse.GreenShadow.dto.filter.dto.FilterVehicleDTO;
+import lk.ijse.GreenShadow.entity.Staff;
 import lk.ijse.GreenShadow.entity.Vehicle;
 import lk.ijse.GreenShadow.repository.VehicleRepo;
 import lk.ijse.GreenShadow.service.VehicleService;
@@ -10,9 +13,14 @@ import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lk.ijse.GreenShadow.util.map.Map;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 @Transactional
@@ -42,7 +50,17 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public List<VehicleDTO> getAllVehicles(FilterVehicleDTO filterVehicleDTO) {
-        return null;
+        Pageable pageable = PageRequest.of(filterVehicleDTO.getPage(), filterVehicleDTO.getPerPage());
+        Specification<Vehicle> specification = VehicleSpecifiction.createSpecification(filterVehicleDTO);
+
+        Page<Vehicle> resualt = vehicleRepo.findAll(specification,pageable);
+        List<VehicleDTO> vehicles = new ArrayList<>();
+
+        for (Vehicle vehicle : resualt) {
+            vehicles.add(map.toVehicleDto(vehicle));
+        }
+
+        return vehicles;
     }
 
     @Override
