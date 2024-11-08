@@ -22,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -65,6 +67,11 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public VehicleDTO findVehicle(String id) {
+        Optional<Vehicle> byId = vehicleRepo.findById(id);
+
+        if (byId.isPresent()) {
+            return map.toVehicleDto(byId.get());
+        }
         return null;
     }
 

@@ -74,4 +74,9 @@ public class VehicleController{
         FilterVehicleDTO filterVehicleDTO = new FilterVehicleDTO(data,page,perPage);
         return vehicleService.getAllVehicles(filterVehicleDTO);
     }
+
+    @GetMapping(value = "{id}")
+    public VehicleDTO findVehicle(@PathVariable("id")String id){
+        return vehicleService.findVehicle(id);
+    }
 }
