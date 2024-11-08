@@ -2,13 +2,13 @@ package lk.ijse.GreenShadow.Specification;
 
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Predicate;
-import lk.ijse.GreenShadow.dto.filter.dto.FilterStuffDto;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterStuffDTO;
 import lk.ijse.GreenShadow.entity.Staff;
 import org.springframework.data.jpa.domain.Specification;
 
 
 public class StaffSpecification {
-    public static Specification<Staff> createSpecification(FilterStuffDto filterStuffDto){
+    public static Specification<Staff> createSpecification(FilterStuffDTO filterStuffDto){
         return (root, query, builder) -> {
             Predicate predicate = builder.conjunction();
 

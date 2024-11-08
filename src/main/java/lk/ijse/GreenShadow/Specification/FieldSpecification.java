@@ -2,12 +2,12 @@ package lk.ijse.GreenShadow.Specification;
 
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Predicate;
-import lk.ijse.GreenShadow.dto.filter.dto.FilterFieldDto;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterFieldDTO;
 import lk.ijse.GreenShadow.entity.Field;
 import org.springframework.data.jpa.domain.Specification;
 
 public class FieldSpecification {
-    public static Specification<Field> createSpecification(FilterFieldDto filterFieldDto){
+    public static Specification<Field> createSpecification(FilterFieldDTO filterFieldDto){
         return (root, query, builder) -> {
             Predicate predicate = builder.conjunction();
 

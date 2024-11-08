@@ -1,8 +1,8 @@
 package lk.ijse.GreenShadow.service;
 
 import lk.ijse.GreenShadow.Specification.StaffSpecification;
-import lk.ijse.GreenShadow.dto.StaffDto;
-import lk.ijse.GreenShadow.dto.filter.dto.FilterStuffDto;
+import lk.ijse.GreenShadow.dto.StaffDTO;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterStuffDTO;
 import lk.ijse.GreenShadow.entity.Staff;
 import lk.ijse.GreenShadow.repository.StaffRepo;
 import lk.ijse.GreenShadow.util.Convater.Convater;
@@ -29,13 +29,13 @@ public class StaffServiceImpl implements StaffService {
     private final Map map;
     private final Convater convater;
     @Override
-    public void saveStaff(StaffDto staffDto) {
+    public void saveStaff(StaffDTO staffDto) {
         if (staffRepo.existsById(staffDto.getStaff_id())) throw new AlradyExsistException("Member Alrady Exsist");
         staffRepo.save(map.toStaffEntity(staffDto));
     }
 
     @Override
-    public void updateStaff(StaffDto staffDto) {
+    public void updateStaff(StaffDTO staffDto) {
         Staff found = staffRepo.findById(staffDto.getStaff_id()).orElseThrow(() -> new NotFoundException("Member not Found"));
         Staff update = map.toStaffEntity(staffDto);
         convater.convertStaff(found,update);
@@ -48,12 +48,12 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public List<StaffDto> getAllStaff(FilterStuffDto filterStuffDto) {
+    public List<StaffDTO> getAllStaff(FilterStuffDTO filterStuffDto) {
         Pageable pageable = PageRequest.of(filterStuffDto.getPage(), filterStuffDto.getPerPage());
         Specification<Staff> specification = StaffSpecification.createSpecification(filterStuffDto);
 
         Page<Staff> resualt = staffRepo.findAll(specification,pageable);
-        List<StaffDto> staff = new ArrayList<>();
+        List<StaffDTO> staff = new ArrayList<>();
 
         for (Staff staffSet : resualt) {
             staff.add(map.toStaffDto(staffSet));
@@ -62,7 +62,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public StaffDto findStaff(String id) {
+    public StaffDTO findStaff(String id) {
         Optional<Staff> byId = staffRepo.findById(id);
 
         if (byId.isPresent()) {

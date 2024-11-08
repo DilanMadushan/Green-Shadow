@@ -1,7 +1,6 @@
 package lk.ijse.GreenShadow.dto.filter.dto;
 
-import lk.ijse.GreenShadow.dto.filter.base.BaseFilterDto;
-import lk.ijse.GreenShadow.util.enums.Category;
+import lk.ijse.GreenShadow.dto.filter.base.BaseFilterDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,10 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class FilterFieldDto extends BaseFilterDto {
+public class FilterVehicleDTO extends BaseFilterDTO {
     private String data;
 
-    public FilterFieldDto( String data, int page, int perPage) {
+    public FilterVehicleDTO(String data,int page, int perPage) {
         super(page, perPage);
         this.data = data;
     }

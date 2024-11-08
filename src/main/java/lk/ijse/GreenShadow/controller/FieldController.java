@@ -1,14 +1,11 @@
 package lk.ijse.GreenShadow.controller;
 
 import lk.ijse.GreenShadow.dto.FieldDTO;
-import lk.ijse.GreenShadow.dto.filter.dto.FilterFieldDto;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterFieldDTO;
 import lk.ijse.GreenShadow.service.FieldService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Point;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -76,7 +73,7 @@ public class FieldController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int perPage
     ){
-        FilterFieldDto filterFieldDto = new FilterFieldDto(data,page,perPage);
+        FilterFieldDTO filterFieldDto = new FilterFieldDTO(data,page,perPage);
         return fieldService.getAllField(filterFieldDto);
     }
 

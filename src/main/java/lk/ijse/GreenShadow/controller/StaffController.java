@@ -1,7 +1,7 @@
 package lk.ijse.GreenShadow.controller;
 
-import lk.ijse.GreenShadow.dto.StaffDto;
-import lk.ijse.GreenShadow.dto.filter.dto.FilterStuffDto;
+import lk.ijse.GreenShadow.dto.StaffDTO;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterStuffDTO;
 import lk.ijse.GreenShadow.service.StaffService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
@@ -23,7 +23,7 @@ public class StaffController {
     }
 
     @PostMapping
-    public ResponseEntity<?> saveStaff(@RequestBody StaffDto staffDto){
+    public ResponseEntity<?> saveStaff(@RequestBody StaffDTO staffDto){
         try {
             staffService.saveStaff(staffDto);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -37,7 +37,7 @@ public class StaffController {
     }
 
     @PatchMapping
-    public ResponseEntity<?> updateStaff(@RequestBody StaffDto staffDto){
+    public ResponseEntity<?> updateStaff(@RequestBody StaffDTO staffDto){
         try {
             staffService.updateStaff(staffDto);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -65,17 +65,17 @@ public class StaffController {
     }
 
     @GetMapping
-    public List<StaffDto> getAllStuff(
+    public List<StaffDTO> getAllStuff(
             @RequestParam(required = false) String data,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int perPage
     ){
-        FilterStuffDto filterStuffDto = new FilterStuffDto(data,page,perPage);
+        FilterStuffDTO filterStuffDto = new FilterStuffDTO(data,page,perPage);
         return staffService.getAllStaff(filterStuffDto);
     }
 
     @GetMapping(value = "{id}")
-    public StaffDto findStaff(@PathVariable("id") String id){
+    public StaffDTO findStaff(@PathVariable("id") String id){
         return staffService.findStaff(id);
     }
 

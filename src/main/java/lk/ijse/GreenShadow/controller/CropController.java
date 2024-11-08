@@ -1,7 +1,7 @@
 package lk.ijse.GreenShadow.controller;
 
 import lk.ijse.GreenShadow.dto.CropDTO;
-import lk.ijse.GreenShadow.dto.filter.dto.FilterCropDto;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterCropDTO;
 import lk.ijse.GreenShadow.service.CropService;
 import lk.ijse.GreenShadow.util.enums.Category;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
@@ -71,7 +71,7 @@ public class CropController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int perPage
             ){
-        FilterCropDto filterCropDto = new FilterCropDto(data,category,page,perPage);
+        FilterCropDTO filterCropDto = new FilterCropDTO(data,category,page,perPage);
         return cropService.getAllCrop(filterCropDto);
     }
 

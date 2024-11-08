@@ -2,7 +2,7 @@ package lk.ijse.GreenShadow.service;
 
 import lk.ijse.GreenShadow.Specification.FieldSpecification;
 import lk.ijse.GreenShadow.dto.FieldDTO;
-import lk.ijse.GreenShadow.dto.filter.dto.FilterFieldDto;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterFieldDTO;
 import lk.ijse.GreenShadow.entity.Field;
 import lk.ijse.GreenShadow.repository.FieldRepo;
 import lk.ijse.GreenShadow.util.Convater.Convater;
@@ -49,7 +49,7 @@ public class FieldServiceImpl implements FieldService {
     }
 
     @Override
-    public List<FieldDTO> getAllField(FilterFieldDto filterFieldDto) {
+    public List<FieldDTO> getAllField(FilterFieldDTO filterFieldDto) {
         Pageable pageable = PageRequest.of(filterFieldDto.getPage(), filterFieldDto.getPerPage());
         Specification<Field> specification = FieldSpecification.createSpecification(filterFieldDto);
 

@@ -2,7 +2,7 @@ package lk.ijse.GreenShadow.util.map;
 
 import lk.ijse.GreenShadow.dto.CropDTO;
 import lk.ijse.GreenShadow.dto.FieldDTO;
-import lk.ijse.GreenShadow.dto.StaffDto;
+import lk.ijse.GreenShadow.dto.StaffDTO;
 import lk.ijse.GreenShadow.entity.Crop;
 import lk.ijse.GreenShadow.entity.Field;
 import lk.ijse.GreenShadow.entity.Staff;
@@ -30,11 +30,11 @@ public class Map {
         return modelMapper.map(field, FieldDTO.class);
     }
 
-    public Staff toStaffEntity(StaffDto staffDto){
+    public Staff toStaffEntity(StaffDTO staffDto){
         return modelMapper.map(staffDto, Staff.class);
     }
 
-    public StaffDto toStaffDto(Staff staff){
-        return modelMapper.map(staff, StaffDto.class);
+    public StaffDTO toStaffDto(Staff staff){
+        return modelMapper.map(staff, StaffDTO.class);
     }
 }

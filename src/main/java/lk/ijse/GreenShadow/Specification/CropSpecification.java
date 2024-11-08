@@ -2,13 +2,13 @@ package lk.ijse.GreenShadow.Specification;
 
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Predicate;
-import lk.ijse.GreenShadow.dto.filter.dto.FilterCropDto;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterCropDTO;
 import lk.ijse.GreenShadow.entity.Crop;
 import org.springframework.data.jpa.domain.Specification;
 
 
 public class CropSpecification {
-    public static Specification<Crop> createSpecification(FilterCropDto filterCropDto){
+    public static Specification<Crop> createSpecification(FilterCropDTO filterCropDto){
         return (root, query, builder) -> {
             Predicate predicate = builder.conjunction();
 

@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class StaffDto {
+public class StaffDTO {
     private String staff_id;
     private String first_name;
     private String last_name;

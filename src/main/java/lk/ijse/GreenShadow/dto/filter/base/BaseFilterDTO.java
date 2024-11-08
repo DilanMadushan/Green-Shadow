@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class BaseFilterDto {
+public class BaseFilterDTO {
     private int page;
     private int perPage;
 }

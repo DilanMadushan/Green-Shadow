@@ -2,7 +2,7 @@ package lk.ijse.GreenShadow.service;
 
 import lk.ijse.GreenShadow.Specification.CropSpecification;
 import lk.ijse.GreenShadow.dto.CropDTO;
-import lk.ijse.GreenShadow.dto.filter.dto.FilterCropDto;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterCropDTO;
 import lk.ijse.GreenShadow.entity.Crop;
 import lk.ijse.GreenShadow.repository.CropRepo;
 import lk.ijse.GreenShadow.util.Convater.Convater;
@@ -48,7 +48,7 @@ public class CropServiceImpl implements CropService{
     }
 
     @Override
-    public List<CropDTO> getAllCrop(FilterCropDto filterCropDto) {
+    public List<CropDTO> getAllCrop(FilterCropDTO filterCropDto) {
 
         Pageable pageable = PageRequest.of(filterCropDto.getPage(), filterCropDto.getPerPage());
         Specification<Crop> specification = CropSpecification.createSpecification(filterCropDto);
