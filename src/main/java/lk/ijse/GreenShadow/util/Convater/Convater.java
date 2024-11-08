@@ -3,9 +3,7 @@ package lk.ijse.GreenShadow.util.Convater;
 import jakarta.persistence.*;
 import lk.ijse.GreenShadow.dto.CropDTO;
 import lk.ijse.GreenShadow.entity.*;
-import lk.ijse.GreenShadow.util.enums.Designation;
-import lk.ijse.GreenShadow.util.enums.Gender;
-import lk.ijse.GreenShadow.util.enums.Role;
+import lk.ijse.GreenShadow.util.enums.*;
 import org.springframework.stereotype.Component;
 
 import java.awt.*;
@@ -64,6 +62,17 @@ public class Convater {
         foundVehicle.setRemarks(update.getRemarks());
         return foundVehicle;
     }
+
+    public Equipment convertEquipment(Equipment found, Equipment update) {
+        found.setEquipment_Id(update.getEquipment_Id());
+        found.setName(update.getName());
+        found.setType(update.getType());
+        found.setStatus(update.getStatus());
+        found.setStaff_id(update.getStaff_id());
+        found.setField_code(update.getField_code());
+        return found;
+    }
+
 
 
 }

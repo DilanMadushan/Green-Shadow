@@ -22,8 +22,8 @@ public class Equipment {
     private EquipmentStatus status;
     @OneToOne
     @JoinColumn(name = "staff_id",nullable = false)
-    private Staff assigned_staff;
+    private Staff staff_id;
     @OneToOne
     @JoinColumn(name = "field_code",nullable = false)
-    private Field assigned_field;
+    private Field field_code;
 }

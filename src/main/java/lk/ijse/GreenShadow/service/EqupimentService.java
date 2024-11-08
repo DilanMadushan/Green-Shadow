@@ -6,10 +6,10 @@ import lk.ijse.GreenShadow.dto.filter.dto.FilterEquipmentDTO;
 import java.util.List;
 
 public interface EqupimentService {
-    void saveEqupiment();
-    void updateEqupiment();
-    void deleteEqupiment();
+    void saveEqupiment(EquipmentDTO equipmentDTO);
+    void updateEqupiment(EquipmentDTO equipmentDTO);
+    void deleteEqupiment(String id);
     List<EquipmentDTO> getALlEqupiment(FilterEquipmentDTO filterEquipmentDTO);
-    EquipmentDTO findEquipment();
+    EquipmentDTO findEquipment(String id);
     String findLastIndex();
 }
