@@ -13,6 +13,6 @@ public class VehicleDTO {
     private String vehicle_category;
     private String fuel_type;
     private String status;
-    private String staffId;
+    private String staff_id;
     private String remarks;
 }

@@ -1,10 +1,11 @@
-package lk.ijse.GreenShadow.service;
+package lk.ijse.GreenShadow.service.Impl;
 
 import lk.ijse.GreenShadow.Specification.StaffSpecification;
 import lk.ijse.GreenShadow.dto.StaffDTO;
 import lk.ijse.GreenShadow.dto.filter.dto.FilterStuffDTO;
 import lk.ijse.GreenShadow.entity.Staff;
 import lk.ijse.GreenShadow.repository.StaffRepo;
+import lk.ijse.GreenShadow.service.StaffService;
 import lk.ijse.GreenShadow.util.Convater.Convater;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;

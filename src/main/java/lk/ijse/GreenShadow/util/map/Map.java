@@ -3,9 +3,11 @@ package lk.ijse.GreenShadow.util.map;
 import lk.ijse.GreenShadow.dto.CropDTO;
 import lk.ijse.GreenShadow.dto.FieldDTO;
 import lk.ijse.GreenShadow.dto.StaffDTO;
+import lk.ijse.GreenShadow.dto.VehicleDTO;
 import lk.ijse.GreenShadow.entity.Crop;
 import lk.ijse.GreenShadow.entity.Field;
 import lk.ijse.GreenShadow.entity.Staff;
+import lk.ijse.GreenShadow.entity.Vehicle;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -36,5 +38,13 @@ public class Map {
 
     public StaffDTO toStaffDto(Staff staff){
         return modelMapper.map(staff, StaffDTO.class);
+    }
+
+    public Vehicle toVehicleEntity(VehicleDTO vehicleDTO){
+        return modelMapper.map(vehicleDTO, Vehicle.class);
+    }
+
+    public VehicleDTO toVehicleDto(Vehicle vehicle){
+        return modelMapper.map(vehicle, VehicleDTO.class);
     }
 }

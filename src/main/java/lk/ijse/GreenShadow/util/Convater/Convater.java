@@ -54,4 +54,15 @@ public class Convater {
         return foundStaff;
     }
 
+    public void convertVehicle(Vehicle foundVehicle, Vehicle update) {
+        foundVehicle.setVehicle_code(update.getVehicle_code());
+        foundVehicle.setLicense_plate_number(update.getLicense_plate_number());
+        foundVehicle.setVehicle_category(update.getVehicle_category());
+        foundVehicle.setFuel_type(update.getFuel_type());
+        foundVehicle.setStatus(update.getStatus());
+        foundVehicle.setStaff(update.getStaff());
+        foundVehicle.setRemarks(update.getRemarks());
+    }
+
+
 }
