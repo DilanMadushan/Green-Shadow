@@ -76,5 +76,10 @@ public class EquipmentController {
 
     }
 
+    @GetMapping(value = "{id}")
+    public EquipmentDTO findEquipment(@PathVariable("id")String id){
+        return equpimentService.findEquipment(id);
+    }
+
 
 }

@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -69,6 +70,11 @@ public class EqupimentServiceImpl implements EqupimentService {
 
     @Override
     public EquipmentDTO findEquipment(String id) {
+        Optional<Equipment> byId = equipmentRepo.findById(id);
+
+        if (byId.isPresent()) {
+            return map.toEquipmentDto(byId.get());
+        }
         return null;
     }
 
