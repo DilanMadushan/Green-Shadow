@@ -1,13 +1,18 @@
 package lk.ijse.GreenShadow.controller;
 
 import lk.ijse.GreenShadow.dto.VehicleResavationDTO;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterVehicleResavationDTO;
+import lk.ijse.GreenShadow.entity.VehicleResavation;
 import lk.ijse.GreenShadow.service.VehicleResavationService;
+import lk.ijse.GreenShadow.util.enums.ResavationType;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -30,5 +35,21 @@ public class VehicleResavationController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping
+    public List<VehicleResavationDTO> getAllResavation(
+            @RequestParam(required = false)String data,
+            @RequestParam(required = false) ResavationType type,
+            @RequestParam(defaultValue = "0")int page,
+            @RequestParam(defaultValue = "10")int perPage
+    ){
+        FilterVehicleResavationDTO filterVehicleResavationDTO =new FilterVehicleResavationDTO(
+                data,
+                type,
+                page,
+                perPage
+        );
+        return vehicleResavationService.getAllResavation(filterVehicleResavationDTO);
     }
 }

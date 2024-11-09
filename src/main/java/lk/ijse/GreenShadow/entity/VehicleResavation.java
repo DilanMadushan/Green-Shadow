@@ -2,12 +2,13 @@ package lk.ijse.GreenShadow.entity;
 
 import jakarta.persistence.*;
 import lk.ijse.GreenShadow.util.enums.ResavationType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "vehicle_resavation")
 public class VehicleResavation {
@@ -15,6 +16,7 @@ public class VehicleResavation {
     private String resavationId;
     private String date;
     private String resone;
+    @Enumerated(EnumType.STRING)
     private ResavationType resavationType;
     @ManyToOne
     @JoinColumn(name = "staff_id",nullable = false)

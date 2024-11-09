@@ -1,8 +1,10 @@
 package lk.ijse.GreenShadow.service.Impl;
 
-import lk.ijse.GreenShadow.dto.VehicleDTO;
+import lk.ijse.GreenShadow.Specification.ResavationSpecification;
+import lk.ijse.GreenShadow.Specification.VehicleSpecifiction;
 import lk.ijse.GreenShadow.dto.VehicleResavationDTO;
-import lk.ijse.GreenShadow.dto.filter.dto.FilterVehicleDTO;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterVehicleResavationDTO;
+import lk.ijse.GreenShadow.entity.VehicleResavation;
 import lk.ijse.GreenShadow.repository.VehicleResavationRepo;
 import lk.ijse.GreenShadow.service.VehicleResavationService;
 import lk.ijse.GreenShadow.service.VehicleService;
@@ -11,8 +13,15 @@ import lk.ijse.GreenShadow.util.enums.Status;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.map.Map;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -32,5 +41,19 @@ public class VehicleResavationServiceImpl implements VehicleResavationService {
         }else{
             vehicleService.updateStatus(resavationDTO.getVehicle_code(),Status.AVAILABLE);
         }
+    }
+
+    @Override
+    public List<VehicleResavationDTO> getAllResavation(FilterVehicleResavationDTO resavationDTO) {
+        Pageable pageable = PageRequest.of(resavationDTO.getPage(), resavationDTO.getPerPage());
+        Specification<VehicleResavation> specification = ResavationSpecification.createSpecification(resavationDTO);
+
+        Page<VehicleResavation> resualt = vehicleResavationRepo.findAll(specification,pageable);
+        List<VehicleResavationDTO> vehicles = new ArrayList<>();
+
+        for (VehicleResavation resavation : resualt) {
+            vehicles.add(map.toVehicleResavationDTO(resavation));
+        }
+        return vehicles;
     }
 }
