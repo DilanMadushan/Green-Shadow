@@ -80,6 +80,6 @@ public class EqupimentServiceImpl implements EqupimentService {
 
     @Override
     public String findLastIndex() {
-        return null;
+        return equipmentRepo.findLastIndex();
     }
 }

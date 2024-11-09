@@ -81,5 +81,10 @@ public class EquipmentController {
         return equpimentService.findEquipment(id);
     }
 
+    @GetMapping("/last")
+    public String findLastIndex(){
+        return equpimentService.findLastIndex();
+    }
+
 
 }
