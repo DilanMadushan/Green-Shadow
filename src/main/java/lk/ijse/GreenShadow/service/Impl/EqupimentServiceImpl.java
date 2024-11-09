@@ -37,7 +37,8 @@ public class EqupimentServiceImpl implements EqupimentService {
 
     @Override
     public void deleteEqupiment(String id) {
-
+        equipmentRepo.findById(id).orElseThrow(()->new NotFoundException("Equipment not Found"));
+        equipmentRepo.deleteById(id);
     }
 
     @Override
