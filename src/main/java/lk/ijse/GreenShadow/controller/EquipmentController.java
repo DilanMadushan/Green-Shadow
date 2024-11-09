@@ -1,6 +1,7 @@
 package lk.ijse.GreenShadow.controller;
 
 import lk.ijse.GreenShadow.dto.EquipmentDTO;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterEquipmentDTO;
 import lk.ijse.GreenShadow.service.EqupimentService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
@@ -8,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -60,6 +63,17 @@ public class EquipmentController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping
+    public List<EquipmentDTO> getAllEquipment(
+            @RequestParam(required = false) String data,
+            @RequestParam(defaultValue = "0")int page,
+            @RequestParam(defaultValue = "10")int perPage
+    ){
+        FilterEquipmentDTO filterEquipmentDTO = new FilterEquipmentDTO(data,page,perPage);
+        return equpimentService.getALlEqupiment(filterEquipmentDTO);
+
     }
 
 

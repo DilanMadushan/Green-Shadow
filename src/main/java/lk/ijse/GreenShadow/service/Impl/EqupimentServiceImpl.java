@@ -1,8 +1,12 @@
 package lk.ijse.GreenShadow.service.Impl;
 
+import lk.ijse.GreenShadow.Specification.EquipmentSpecification;
+import lk.ijse.GreenShadow.Specification.FieldSpecification;
 import lk.ijse.GreenShadow.dto.EquipmentDTO;
+import lk.ijse.GreenShadow.dto.FieldDTO;
 import lk.ijse.GreenShadow.dto.filter.dto.FilterEquipmentDTO;
 import lk.ijse.GreenShadow.entity.Equipment;
+import lk.ijse.GreenShadow.entity.Field;
 import lk.ijse.GreenShadow.repository.EquipmentRepo;
 import lk.ijse.GreenShadow.service.EqupimentService;
 import lk.ijse.GreenShadow.util.Convater.Convater;
@@ -10,9 +14,14 @@ import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lk.ijse.GreenShadow.util.map.Map;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,7 +52,19 @@ public class EqupimentServiceImpl implements EqupimentService {
 
     @Override
     public List<EquipmentDTO> getALlEqupiment(FilterEquipmentDTO filterEquipmentDTO) {
-        return null;
+        Pageable pageable = PageRequest.of(filterEquipmentDTO.getPage(), filterEquipmentDTO.getPerPage());
+        Specification<Equipment> specification = EquipmentSpecification.createSpecification(filterEquipmentDTO);
+
+        Page<Equipment> resualt = equipmentRepo.findAll(specification,pageable);
+
+        List<EquipmentDTO> equipments = new ArrayList<>();
+
+        for (Equipment equipment : resualt) {
+            equipments.add(map.toEquipmentDto(equipment));
+        }
+
+        return equipments;
+
     }
 
     @Override
