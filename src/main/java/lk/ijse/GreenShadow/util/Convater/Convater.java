@@ -66,8 +66,6 @@ public class Convater {
         found.setName(update.getName());
         found.setType(update.getType());
         found.setStatus(update.getStatus());
-        found.setStaff_id(update.getStaff_id());
-        found.setField_code(update.getField_code());
         return found;
     }
 

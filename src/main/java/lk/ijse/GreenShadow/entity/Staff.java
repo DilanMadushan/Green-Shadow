@@ -41,4 +41,6 @@ public class Staff {
     private List<MonitoringLog> log;
     @OneToMany(mappedBy = "staff")
     private List<VehicleResavation> vehicleResavations;
+    @OneToMany(mappedBy = "staff")
+    private List<EquipmentDetails> equipmentDetails;
 }

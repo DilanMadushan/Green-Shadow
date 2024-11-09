@@ -26,4 +26,6 @@ public class Field {
     private String field_image_1;
     @Column(columnDefinition = "LONGTEXT")
     private String field_image_2;
+    @OneToMany(mappedBy = "field")
+    private List<EquipmentDetails> equipmentDetails;
 }

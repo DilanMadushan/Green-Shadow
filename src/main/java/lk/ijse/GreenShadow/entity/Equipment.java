@@ -5,6 +5,8 @@ import lk.ijse.GreenShadow.util.enums.EquipmentStatus;
 import lk.ijse.GreenShadow.util.enums.EquipmentType;
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -20,10 +22,6 @@ public class Equipment {
     private EquipmentType type;
     @Enumerated(EnumType.STRING)
     private EquipmentStatus status;
-    @OneToOne
-    @JoinColumn(name = "staff_id",nullable = false)
-    private Staff staff_id;
-    @OneToOne
-    @JoinColumn(name = "field_code",nullable = false)
-    private Field field_code;
+    @OneToMany(mappedBy = "equipment")
+    private List<EquipmentDetails> equipmentDetails;
 }

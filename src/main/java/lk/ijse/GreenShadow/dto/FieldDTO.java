@@ -2,6 +2,7 @@ package lk.ijse.GreenShadow.dto;
 
 
 import lk.ijse.GreenShadow.entity.Crop;
+import lk.ijse.GreenShadow.entity.EquipmentDetails;
 import lk.ijse.GreenShadow.entity.MonitoringLog;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,4 +22,5 @@ public class FieldDTO {
     private List<MonitoringLog> log;
     private String field_image_1;
     private String field_image_2;
+    private List<EquipmentDetails> equipmentDetails;
 }

@@ -1,5 +1,6 @@
 package lk.ijse.GreenShadow.dto;
 
+import lk.ijse.GreenShadow.entity.EquipmentDetails;
 import lk.ijse.GreenShadow.entity.MonitoringLog;
 import lk.ijse.GreenShadow.entity.VehicleResavation;
 import lk.ijse.GreenShadow.util.enums.Designation;
@@ -33,4 +34,5 @@ public class StaffDTO {
     private Role role;
     private List<MonitoringLog> log;
     private List<VehicleResavation> vehicleResavations;
+    private List<EquipmentDetails> equipmentDetails;
 }
