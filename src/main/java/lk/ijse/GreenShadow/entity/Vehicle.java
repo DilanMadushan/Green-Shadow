@@ -1,7 +1,10 @@
 package lk.ijse.GreenShadow.entity;
 
 import jakarta.persistence.*;
+import lk.ijse.GreenShadow.util.enums.Status;
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,9 +19,9 @@ public class Vehicle {
     private String license_plate_number;
     private String vehicle_category;
     private String fuel_type;
-    private String status;
-    @ManyToOne
-    @JoinColumn(name = "staff_id",nullable = false)
-    private Staff staff;
+    @Enumerated(EnumType.STRING)
+    private Status status;
     private String remarks;
+    @OneToMany(mappedBy = "vehicle")
+    private List<VehicleResavation> vehicleResavations;
 }

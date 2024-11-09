@@ -1,7 +1,7 @@
 package lk.ijse.GreenShadow.controller;
 
-import lk.ijse.GreenShadow.dto.EquipmentDTO;
-import lk.ijse.GreenShadow.service.EqupimentService;
+import lk.ijse.GreenShadow.dto.VehicleResavationDTO;
+import lk.ijse.GreenShadow.service.VehicleResavationService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -11,34 +11,18 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/v1/equipment")
+@RequestMapping("api/v1/resavation")
 @RequiredArgsConstructor
-public class EquipmentController {
-    private final EqupimentService equpimentService;
-    @GetMapping("/health")
-    public String healthCheack(){
-        return "All systems are running optimally";
-    }
-
+public class VehicleResavationController {
+    private final VehicleResavationService vehicleResavationService;
     @PostMapping
-    public ResponseEntity<?> saveEquipment(@RequestBody EquipmentDTO equipmentDTO){
+    public ResponseEntity<?> saveResavation(@RequestBody VehicleResavationDTO vehicleResavationDTO){
         try {
-            equpimentService.saveEqupiment(equipmentDTO);
+            vehicleResavationService.saveResavation(vehicleResavationDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (AlradyExsistException e){
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @PatchMapping
-    public ResponseEntity<?> updateEquipment(@RequestBody EquipmentDTO equipmentDTO){
-        try {
-            equpimentService.updateEqupiment(equipmentDTO);
-            return new ResponseEntity<>(HttpStatus.OK);
         }catch (NotFoundException e){
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

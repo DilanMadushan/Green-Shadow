@@ -40,5 +40,5 @@ public class Staff {
     @OneToMany(mappedBy = "staff")
     private List<MonitoringLog> log;
     @OneToMany(mappedBy = "staff")
-    private List<Vehicle> Vehicle;
+    private List<VehicleResavation> vehicleResavations;
 }

@@ -47,7 +47,6 @@ public class Convater {
         foundStaff.setEmail(update.getEmail());
         foundStaff.setRole(update.getRole());
         foundStaff.setLog(update.getLog());
-        foundStaff.setVehicle(update.getVehicle());
 
         return foundStaff;
     }
@@ -58,7 +57,6 @@ public class Convater {
         foundVehicle.setVehicle_category(update.getVehicle_category());
         foundVehicle.setFuel_type(update.getFuel_type());
         foundVehicle.setStatus(update.getStatus());
-        foundVehicle.setStaff(update.getStaff());
         foundVehicle.setRemarks(update.getRemarks());
         return foundVehicle;
     }

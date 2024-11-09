@@ -48,4 +48,12 @@ public class Map {
     public EquipmentDTO toEquipmentDto(Equipment equipment){
         return modelMapper.map(equipment, EquipmentDTO.class);
     }
+
+    public VehicleResavation toVehicleResavationEntity(VehicleResavationDTO resavationDTO){
+        return modelMapper.map(resavationDTO, VehicleResavation.class);
+    }
+
+    public VehicleResavationDTO toVehicleResavationDTO(VehicleResavation resavation){
+        return modelMapper.map(resavation, VehicleResavationDTO.class);
+    }
 }

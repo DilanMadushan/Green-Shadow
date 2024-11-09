@@ -1,14 +1,13 @@
 package lk.ijse.GreenShadow.service.Impl;
 
-import lk.ijse.GreenShadow.Specification.StaffSpecification;
 import lk.ijse.GreenShadow.Specification.VehicleSpecifiction;
 import lk.ijse.GreenShadow.dto.VehicleDTO;
 import lk.ijse.GreenShadow.dto.filter.dto.FilterVehicleDTO;
-import lk.ijse.GreenShadow.entity.Staff;
 import lk.ijse.GreenShadow.entity.Vehicle;
 import lk.ijse.GreenShadow.repository.VehicleRepo;
 import lk.ijse.GreenShadow.service.VehicleService;
 import lk.ijse.GreenShadow.util.Convater.Convater;
+import lk.ijse.GreenShadow.util.enums.Status;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lk.ijse.GreenShadow.util.map.Map;
@@ -78,5 +77,10 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public String getLastIndex() {
         return vehicleRepo.findLastIndex();
+    }
+    @Override
+    public void updateStatus(String id, Status status){
+        Vehicle found = vehicleRepo.findById(id).orElseThrow(() -> new NotFoundException("User Not Found"));
+        found.setStatus(status);
     }
 }
