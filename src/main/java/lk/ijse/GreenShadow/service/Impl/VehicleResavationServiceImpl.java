@@ -36,7 +36,7 @@ public class VehicleResavationServiceImpl implements VehicleResavationService {
     public void saveResavation(VehicleResavationDTO resavationDTO) {
         if (vehicleResavationRepo.existsById(resavationDTO.getResavationId()))throw new AlradyExsistException("Resavation Alrady Exsist");
         vehicleResavationRepo.save(map.toVehicleResavationEntity(resavationDTO));
-        if(resavationDTO.getType() == ResavationType.Pickup){
+        if(resavationDTO.getType() == ResavationType.PICKUP){
             vehicleService.updateStatus(resavationDTO.getVehicle_code(), Status.UNAVAILABLE);
         }else{
             vehicleService.updateStatus(resavationDTO.getVehicle_code(),Status.AVAILABLE);

@@ -1,9 +1,6 @@
 package lk.ijse.GreenShadow.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lk.ijse.GreenShadow.util.enums.ResavationType;
 import lombok.*;
 
@@ -17,6 +14,7 @@ public class EquipmentDetails {
     private String detailId;
     private String date;
     private String resone;
+    @Enumerated(EnumType.STRING)
     private ResavationType resavationType;
     @ManyToOne
     @JoinColumn(name = "staff_id",nullable = false)

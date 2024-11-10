@@ -10,6 +10,8 @@ import lk.ijse.GreenShadow.entity.Field;
 import lk.ijse.GreenShadow.repository.EquipmentRepo;
 import lk.ijse.GreenShadow.service.EqupimentService;
 import lk.ijse.GreenShadow.util.Convater.Convater;
+import lk.ijse.GreenShadow.util.enums.EquipmentStatus;
+import lk.ijse.GreenShadow.util.enums.Status;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lk.ijse.GreenShadow.util.map.Map;
@@ -81,5 +83,11 @@ public class EqupimentServiceImpl implements EqupimentService {
     @Override
     public String findLastIndex() {
         return equipmentRepo.findLastIndex();
+    }
+
+    @Override
+    public void updateStatus(String equipmentId, EquipmentStatus status) {
+        Equipment found = equipmentRepo.findById(equipmentId).orElseThrow(() -> new NotFoundException("Equipment Not Found"));
+        found.setStatus(status);
     }
 }
