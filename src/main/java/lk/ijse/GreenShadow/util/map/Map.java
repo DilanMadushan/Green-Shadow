@@ -1,6 +1,7 @@
 package lk.ijse.GreenShadow.util.map;
 
 import lk.ijse.GreenShadow.dto.*;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterEquipmentDetailsDTO;
 import lk.ijse.GreenShadow.entity.*;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -55,5 +56,13 @@ public class Map {
 
     public VehicleResavationDTO toVehicleResavationDTO(VehicleResavation resavation){
         return modelMapper.map(resavation, VehicleResavationDTO.class);
+    }
+
+    public EquipmentDetails toEquipmentDetalsEntity(EquipmentDetilaisDTO equipmentDetilaisDTO){
+        return modelMapper.map(equipmentDetilaisDTO, EquipmentDetails.class);
+    }
+
+    public FilterEquipmentDetailsDTO toEquipmentDetalsDto(EquipmentDetails equipmentDetails){
+        return modelMapper.map(equipmentDetails, FilterEquipmentDetailsDTO.class);
     }
 }
