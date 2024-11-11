@@ -20,6 +20,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VehicleResavationController {
     private final VehicleResavationService vehicleResavationService;
+    @GetMapping("health")
+    public String helthChack(){
+        return "All systems are running optimally";
+    }
     @PostMapping
     public ResponseEntity<?> saveResavation(@RequestBody VehicleResavationDTO vehicleResavationDTO){
         try {

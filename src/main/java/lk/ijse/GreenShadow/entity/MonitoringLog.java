@@ -26,7 +26,7 @@ public class MonitoringLog {
     private Field field;
     @ManyToOne
     @JoinColumn(name = "crop_code",nullable = false)
-    private Crop crops;
+    private Crop crop;
     @ManyToOne
     @JoinColumn(name = "staff_id",nullable = false)
     private Staff staff;

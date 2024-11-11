@@ -65,4 +65,12 @@ public class Map {
     public EquipmentDetilaisDTO toEquipmentDetalsDto(EquipmentDetails equipmentDetails){
         return modelMapper.map(equipmentDetails, EquipmentDetilaisDTO.class);
     }
+
+    public MonitoringLog toMonitiringLogEntity(MonitoringLogDTO monitoringLogDTO){
+        return modelMapper.map(monitoringLogDTO, MonitoringLog.class);
+    }
+
+    public MonitoringLogDTO toMonitiringLogDto(MonitoringLog monitoringLog){
+        return modelMapper.map(monitoringLog, MonitoringLogDTO.class);
+    }
 }

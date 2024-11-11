@@ -16,10 +16,15 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/vi/equipmentDetails")
+@RequestMapping("api/v1/equipmentDetails")
 @RequiredArgsConstructor
 public class EquipmentDetailsController {
     private final EquipmentDetailsService equipmentDetailsService;
+
+    @GetMapping("health")
+    public String helthChack(){
+        return "All systems are running optimally";
+    }
     @PostMapping
     public ResponseEntity<?> saveEquipmentDetals(@RequestBody EquipmentDetilaisDTO equipmentDetilaisDTO){
         try {

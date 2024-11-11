@@ -26,7 +26,7 @@ public class Crop {
     @ManyToOne
     @JoinColumn(name = "field_code")
     private Field field;
-    @OneToMany(mappedBy = "crops")
+    @OneToMany(mappedBy = "crop")
     private List<MonitoringLog> logs;
 
 }
