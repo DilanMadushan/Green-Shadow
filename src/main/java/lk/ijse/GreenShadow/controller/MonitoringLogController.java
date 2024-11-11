@@ -75,4 +75,8 @@ public class MonitoringLogController {
         FilterMonitoringLodDTO filterMonitoringLodDTO = new FilterMonitoringLodDTO(data,page,perPage);
         return monitoringLogService.getAllMonitoringLog(filterMonitoringLodDTO);
     }
+    @GetMapping("/last")
+    public String findLasIndex(){
+        return monitoringLogService.findLastIndex();
+    }
 }

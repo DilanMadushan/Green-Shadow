@@ -64,6 +64,6 @@ public class MonitoringLogServiceImpl implements MonitoringLogService {
 
     @Override
     public String findLastIndex() {
-        return null;
+        return monitoringLogRepo.findLastIndex();
     }
 }
