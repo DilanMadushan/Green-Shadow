@@ -62,7 +62,7 @@ public class Map {
         return modelMapper.map(equipmentDetilaisDTO, EquipmentDetails.class);
     }
 
-    public FilterEquipmentDetailsDTO toEquipmentDetalsDto(EquipmentDetails equipmentDetails){
-        return modelMapper.map(equipmentDetails, FilterEquipmentDetailsDTO.class);
+    public EquipmentDetilaisDTO toEquipmentDetalsDto(EquipmentDetails equipmentDetails){
+        return modelMapper.map(equipmentDetails, EquipmentDetilaisDTO.class);
     }
 }

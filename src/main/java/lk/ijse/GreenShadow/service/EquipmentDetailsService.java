@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface EquipmentDetailsService {
     void saveEquipmentdetailsDto(EquipmentDetilaisDTO equipmentDetilaisDTO);
-    List<FilterEquipmentDetailsDTO> getAllEquipment(FilterEquipmentDetailsDTO filterEquipmentDetailsDTO);
+    List<EquipmentDetilaisDTO> getAllEquipment(FilterEquipmentDetailsDTO filterEquipmentDetailsDTO);
 
 }
