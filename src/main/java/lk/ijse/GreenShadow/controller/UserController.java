@@ -47,4 +47,17 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @DeleteMapping(value = "{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id") String id){
+        try {
+            userService.deleteUser(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (NotFoundException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
