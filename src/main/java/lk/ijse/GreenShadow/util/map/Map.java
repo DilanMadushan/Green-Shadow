@@ -73,4 +73,12 @@ public class Map {
     public MonitoringLogDTO toMonitiringLogDto(MonitoringLog monitoringLog){
         return modelMapper.map(monitoringLog, MonitoringLogDTO.class);
     }
+
+    public User toUserEntity(UserDto userDto){
+        return modelMapper.map(userDto, User.class);
+    }
+
+    public UserDto toUserDto(User user){
+        return modelMapper.map(user, UserDto.class);
+    }
 }

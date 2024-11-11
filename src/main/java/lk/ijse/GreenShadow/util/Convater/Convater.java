@@ -81,6 +81,12 @@ public class Convater {
         return found;
     }
 
+    public User convertUser(User found,User update){
+        found.setEmail(update.getEmail());
+        found.setPassword(update.getPassword());
+        found.setRole(update.getRole());
+        return found
+    }
 
 
 
