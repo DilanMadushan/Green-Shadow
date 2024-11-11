@@ -1,7 +1,11 @@
 package lk.ijse.GreenShadow.service.Impl;
 
+import lk.ijse.GreenShadow.Specification.StaffSpecification;
+import lk.ijse.GreenShadow.Specification.UserSpecification;
 import lk.ijse.GreenShadow.dto.UserDto;
 import lk.ijse.GreenShadow.dto.filter.dto.FilterFieldDTO;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterUserDto;
+import lk.ijse.GreenShadow.entity.Staff;
 import lk.ijse.GreenShadow.entity.User;
 import lk.ijse.GreenShadow.repository.UserRepo;
 import lk.ijse.GreenShadow.service.UserService;
@@ -10,9 +14,14 @@ import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lk.ijse.GreenShadow.util.map.Map;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 @Transactional
@@ -41,7 +50,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> getAllUser(FilterFieldDTO filterFieldDTO) {
+    public List<UserDto> getAllUser(FilterUserDto filterUserDto) {
+        Pageable pageable = PageRequest.of(filterUserDto.getPage(), filterUserDto.getPerPage());
+        Specification<User> specification = UserSpecification.createSpecification(filterUserDto);
+
+        Page<User> all = userRepo.findAll(specification, pageable);
+        List<UserDto> users = new ArrayList<>();
+
+        if(all !=null){
+            for (User user : all) {
+                users.add(map.toUserDto(user));
+            }
+            return users;
+        }else new NotFoundException("Users not Found");
+
         return null;
     }
 
