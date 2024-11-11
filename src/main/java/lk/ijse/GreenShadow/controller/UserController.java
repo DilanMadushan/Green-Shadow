@@ -3,6 +3,7 @@ package lk.ijse.GreenShadow.controller;
 import lk.ijse.GreenShadow.dto.UserDto;
 import lk.ijse.GreenShadow.service.UserService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
+import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,20 @@ public class UserController {
         } catch (AlradyExsistException e){
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PatchMapping
+    public ResponseEntity<?> updateUSer(@RequestBody UserDto userDto){
+        try {
+            userService.updateUser(userDto);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (NotFoundException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -85,7 +85,7 @@ public class Convater {
         found.setEmail(update.getEmail());
         found.setPassword(update.getPassword());
         found.setRole(update.getRole());
-        return found
+        return found;
     }
 
 
