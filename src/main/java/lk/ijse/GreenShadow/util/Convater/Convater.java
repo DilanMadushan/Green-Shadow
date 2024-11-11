@@ -69,6 +69,19 @@ public class Convater {
         return found;
     }
 
+    public MonitoringLog convertMonitoringLog(MonitoringLog found, MonitoringLog update) {
+        found.setLog_code(update.getLog_code());
+        found.setLog_date(update.getLog_date());
+        found.setLog_details(update.getLog_details());
+        found.setObserved_image(update.getObserved_image());
+        found.setField(update.getField());
+        found.setCrop(update.getCrop());
+        found.setStaff(update.getStaff());
+
+        return found;
+    }
+
+
 
 
 }
