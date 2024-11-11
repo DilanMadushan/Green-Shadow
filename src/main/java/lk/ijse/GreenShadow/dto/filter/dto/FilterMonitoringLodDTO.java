@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class FilterMonitoringLodDTO extends BaseFilterDTO {
     private String data;
-    public FilterMonitoringLodDTO(int page, int perPage, String data) {
+    public FilterMonitoringLodDTO( String data,int page, int perPage) {
         super(page, perPage);
         this.data = data;
     }

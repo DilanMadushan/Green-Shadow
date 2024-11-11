@@ -1,6 +1,7 @@
 package lk.ijse.GreenShadow.controller;
 
 import lk.ijse.GreenShadow.dto.MonitoringLogDTO;
+import lk.ijse.GreenShadow.dto.filter.dto.FilterMonitoringLodDTO;
 import lk.ijse.GreenShadow.service.MonitoringLogService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
@@ -8,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -61,5 +64,15 @@ public class MonitoringLogController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping
+    public List<MonitoringLogDTO> getAllMoniteringLog(
+            @RequestParam(required = false) String data,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int perPage
+    ){
+        FilterMonitoringLodDTO filterMonitoringLodDTO = new FilterMonitoringLodDTO(data,page,perPage);
+        return monitoringLogService.getAllMonitoringLog(filterMonitoringLodDTO);
     }
 }
