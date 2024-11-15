@@ -15,6 +15,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class AuthonticationService {
@@ -42,6 +44,15 @@ public class AuthonticationService {
                 )
         );
         User user = userRepo.findByEmail(signIn.getEmail()).orElseThrow(() -> new NotFoundException("User not Found"));
+        var jwtToken = jwtService.genarateToken(user);
+        return JWTAuthResponse.builder()
+                .token(jwtToken)
+                .build();
+    }
+
+    public JWTAuthResponse refreshToken(String token) {
+        String email = jwtService.extractUserName(token);
+        User user = userRepo.findByEmail(email).orElseThrow(() -> new NotFoundException("User not Found"));
         var jwtToken = jwtService.genarateToken(user);
         return JWTAuthResponse.builder()
                 .token(jwtToken)

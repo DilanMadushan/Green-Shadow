@@ -8,6 +8,7 @@ import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class VehicleController{
         return "All systems are running optimally";
     }
 
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @PostMapping
     public ResponseEntity<?> saveVehicle(@RequestBody VehicleDTO vehicleDTO){
         try {
@@ -65,6 +67,7 @@ public class VehicleController{
         }
     }
 
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping
     public List<VehicleDTO> gelALlVehicle(
             @RequestParam(required = false) String data,

@@ -34,4 +34,9 @@ public class AuthUserController {
     public ResponseEntity<JWTAuthResponse> signIn(@RequestBody SignInDTO signIn){
         return ResponseEntity.ok(authonticationService.signIn(signIn));
     }
+
+    @PostMapping("/refresh/{token}")
+    public ResponseEntity<JWTAuthResponse> refreshToken(@PathVariable("token") String token){
+        return ResponseEntity.ok(authonticationService.refreshToken(token));
+    }
 }
