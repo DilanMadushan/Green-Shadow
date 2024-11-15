@@ -8,6 +8,7 @@ import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class FieldController {
         return "All systems are running optimally";
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @PostMapping
     public ResponseEntity<?> saveField(@RequestBody FieldDTO fieldDTO){
         try {
@@ -38,6 +40,7 @@ public class FieldController {
 
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @DeleteMapping(value = "{id}")
     public ResponseEntity<?> deleteField(@PathVariable("id") String id){
         try {
@@ -52,6 +55,7 @@ public class FieldController {
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @PatchMapping
     public ResponseEntity<?> updateField(@RequestBody FieldDTO fieldDTO){
         try {
@@ -67,6 +71,7 @@ public class FieldController {
 
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @GetMapping
     public List<FieldDTO> getAllFields(
             @RequestParam(required = false) String data,
@@ -77,6 +82,7 @@ public class FieldController {
         return fieldService.getAllField(filterFieldDto);
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @GetMapping("/last")
     public String findLastIndex(){
         return fieldService.getLastIndex();

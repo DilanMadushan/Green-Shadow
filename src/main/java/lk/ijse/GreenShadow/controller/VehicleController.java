@@ -1,5 +1,6 @@
 package lk.ijse.GreenShadow.controller;
 
+import jakarta.annotation.security.RolesAllowed;
 import lk.ijse.GreenShadow.dto.VehicleDTO;
 import lk.ijse.GreenShadow.dto.filter.dto.FilterVehicleDTO;
 import lk.ijse.GreenShadow.service.VehicleService;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,12 +22,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VehicleController{
     private final VehicleService vehicleService;
+
     @GetMapping("/health")
     public String vehicaleHealthCheack(){
         return "All systems are running optimally";
     }
 
-    @PreAuthorize("hasRole('EMPLOYEE')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @PostMapping
     public ResponseEntity<?> saveVehicle(@RequestBody VehicleDTO vehicleDTO){
         try {
@@ -39,6 +43,7 @@ public class VehicleController{
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @PatchMapping
     public ResponseEntity<?> updateVehicle(@RequestBody VehicleDTO vehicleDTO){
         try {
@@ -53,6 +58,7 @@ public class VehicleController{
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @DeleteMapping(value = "{id}")
     public ResponseEntity<?> deleteVEhicle(@PathVariable("id") String id){
         try {
@@ -67,7 +73,8 @@ public class VehicleController{
         }
     }
 
-    @PreAuthorize("hasRole('EMPLOYEE')")
+
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @GetMapping
     public List<VehicleDTO> gelALlVehicle(
             @RequestParam(required = false) String data,
@@ -78,10 +85,12 @@ public class VehicleController{
         return vehicleService.getAllVehicles(filterVehicleDTO);
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @GetMapping(value = "{id}")
     public VehicleDTO findVehicle(@PathVariable("id")String id){
         return vehicleService.findVehicle(id);
     }
+
     @GetMapping("/last")
     public String findLastIndex(){
         return vehicleService.getLastIndex();

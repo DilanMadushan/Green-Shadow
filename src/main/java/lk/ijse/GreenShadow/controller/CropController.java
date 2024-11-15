@@ -9,6 +9,7 @@ import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,8 @@ public class CropController {
     public String helthChack(){
         return "All systems are running optimally";
     }
+
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> saveCrop(@RequestBody CropDTO cropDTO){
 
@@ -38,6 +41,7 @@ public class CropController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @PatchMapping
     public ResponseEntity<?> updateCrop(@RequestBody CropDTO cropDTO){
 
@@ -52,6 +56,7 @@ public class CropController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @DeleteMapping(value = "{id}")
     public ResponseEntity<?> deleteCrop(@PathVariable("id") String id){
         try {
@@ -65,6 +70,7 @@ public class CropController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @GetMapping
     public List<CropDTO> getAllCrop(
             @RequestParam(required = false) String data,
@@ -76,6 +82,7 @@ public class CropController {
         return cropService.getAllCrop(filterCropDto);
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @GetMapping(value = "{id}")
     public CropDTO findCrop(@PathVariable("id") String id){
         return cropService.findCrop(id);

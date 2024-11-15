@@ -8,6 +8,7 @@ import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class MonitoringLogController {
         return "All systems are running optimally";
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @PostMapping
     public ResponseEntity<?> saveMoniteringLog(@RequestBody MonitoringLogDTO monitoringLogDTO){
         try {
@@ -38,6 +40,8 @@ public class MonitoringLogController {
         }
 
     }
+
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @PatchMapping
     public ResponseEntity<?> updateMonitoringLog(@RequestBody MonitoringLogDTO monitoringLogDTO){
         try {
@@ -52,6 +56,7 @@ public class MonitoringLogController {
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @DeleteMapping(value = "{id}")
     public ResponseEntity<?> deleteMonitoringLog(@PathVariable("id") String id){
         try {
@@ -66,6 +71,7 @@ public class MonitoringLogController {
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @GetMapping
     public List<MonitoringLogDTO> getAllMoniteringLog(
             @RequestParam(required = false) String data,
@@ -75,6 +81,8 @@ public class MonitoringLogController {
         FilterMonitoringLodDTO filterMonitoringLodDTO = new FilterMonitoringLodDTO(data,page,perPage);
         return monitoringLogService.getAllMonitoringLog(filterMonitoringLodDTO);
     }
+
+
     @GetMapping("/last")
     public String findLasIndex(){
         return monitoringLogService.findLastIndex();

@@ -10,6 +10,7 @@ import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,8 @@ public class EquipmentDetailsController {
     public String helthChack(){
         return "All systems are running optimally";
     }
+
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @PostMapping
     public ResponseEntity<?> saveEquipmentDetals(@RequestBody EquipmentDetilaisDTO equipmentDetilaisDTO){
         try {
@@ -42,6 +45,7 @@ public class EquipmentDetailsController {
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @GetMapping
     public List<EquipmentDetilaisDTO> getAllEquipmentDetails(
             @RequestParam(required = false) String data,

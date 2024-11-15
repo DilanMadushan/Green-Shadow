@@ -8,6 +8,7 @@ import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class EquipmentController {
         return "All systems are running optimally";
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @PostMapping
     public ResponseEntity<?> saveEquipment(@RequestBody EquipmentDTO equipmentDTO){
         try {
@@ -37,6 +39,7 @@ public class EquipmentController {
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @PatchMapping
     public ResponseEntity<?> updateEquipment(@RequestBody EquipmentDTO equipmentDTO){
         try {
@@ -51,6 +54,7 @@ public class EquipmentController {
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @DeleteMapping(value = "{id}")
     public ResponseEntity<?> deleteEquipment(@PathVariable("id") String id){
         try {
@@ -65,6 +69,7 @@ public class EquipmentController {
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @GetMapping
     public List<EquipmentDTO> getAllEquipment(
             @RequestParam(required = false) String data,
@@ -76,6 +81,7 @@ public class EquipmentController {
 
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @GetMapping(value = "{id}")
     public EquipmentDTO findEquipment(@PathVariable("id")String id){
         return equpimentService.findEquipment(id);

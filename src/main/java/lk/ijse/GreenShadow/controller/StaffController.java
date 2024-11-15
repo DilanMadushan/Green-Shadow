@@ -8,6 +8,7 @@ import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class StaffController {
         return "All systems are running optimally";
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @PostMapping
     public ResponseEntity<?> saveStaff(@RequestBody StaffDTO staffDto){
         try {
@@ -36,6 +38,7 @@ public class StaffController {
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @PatchMapping
     public ResponseEntity<?> updateStaff(@RequestBody StaffDTO staffDto){
         try {
@@ -50,6 +53,7 @@ public class StaffController {
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @DeleteMapping(value = "{id}")
     public ResponseEntity<?> deleteStaff(@PathVariable("id") String id){
         try {
@@ -64,6 +68,7 @@ public class StaffController {
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @GetMapping
     public List<StaffDTO> getAllStuff(
             @RequestParam(required = false) String data,
@@ -74,6 +79,7 @@ public class StaffController {
         return staffService.getAllStaff(filterStuffDto);
     }
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMINISTRATIVE')")
     @GetMapping(value = "{id}")
     public StaffDTO findStaff(@PathVariable("id") String id){
         return staffService.findStaff(id);
