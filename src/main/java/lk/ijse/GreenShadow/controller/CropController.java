@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/crop")
 @RequiredArgsConstructor
@@ -71,7 +70,7 @@ public class CropController {
         }
     }
     @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CropDTO> getAllCrop(
             @RequestParam(required = false) String data,
             @RequestParam(required = false) Category category,

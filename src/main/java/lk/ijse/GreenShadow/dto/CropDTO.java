@@ -21,5 +21,5 @@ public class CropDTO {
     private Category category;
     private String crop_season;
     private String field_code;
-    private List<MonitoringLog> logs;
+//    private List<MonitoringLog> logs;
 }

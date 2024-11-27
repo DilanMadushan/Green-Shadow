@@ -18,9 +18,9 @@ public class FieldDTO {
     private String field_Name;
     private String field_location;
     private double extent_size_of_field;
-    private List<Crop> crops;
-    private List<MonitoringLog> log;
+//    private List<Crop> crops;
+//    private List<MonitoringLog> log;
     private String field_image_1;
     private String field_image_2;
-    private List<EquipmentDetails> equipmentDetails;
+//    private List<EquipmentDetails> equipmentDetails;
 }

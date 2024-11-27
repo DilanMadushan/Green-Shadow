@@ -7,6 +7,7 @@ import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -72,7 +73,7 @@ public class FieldController {
     }
 
     @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<FieldDTO> getAllFields(
             @RequestParam(required = false) String data,
             @RequestParam(defaultValue = "0") int page,
