@@ -14,8 +14,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-@CrossOrigin
 @RestController
 @RequestMapping("api/v1/equipmentDetails")
 @RequiredArgsConstructor
@@ -60,5 +58,10 @@ public class EquipmentDetailsController {
                 perPAge
         );
         return equipmentDetailsService.getAllEquipment(filterEquipmentDetailsDTO);
+    }
+
+    @GetMapping("last")
+    public String findLastIndex(){
+        return equipmentDetailsService.findLastIndex();
     }
 }

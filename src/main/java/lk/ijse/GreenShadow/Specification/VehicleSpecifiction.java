@@ -35,7 +35,7 @@ public class VehicleSpecifiction {
 
 
             assert query != null;
-            query.orderBy(builder.desc(root.get("vehicle_code")));
+            query.orderBy(builder.asc(root.get("vehicle_code")));
 
             return predicate;
         };

@@ -9,4 +9,6 @@ public interface VehicleResavationService {
     void saveResavation(VehicleResavationDTO resavationDTO);
 
     List<VehicleResavationDTO> getAllResavation(FilterVehicleResavationDTO resavationDTO);
+
+    String findLastIndex();
 }

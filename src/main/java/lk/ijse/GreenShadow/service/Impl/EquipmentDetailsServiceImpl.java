@@ -58,4 +58,9 @@ public class EquipmentDetailsServiceImpl implements EquipmentDetailsService {
         return equipments;
     }
 
+    @Override
+    public String findLastIndex() {
+        return equipmentDetailsRepo.findLastIndex();
+    }
+
 }

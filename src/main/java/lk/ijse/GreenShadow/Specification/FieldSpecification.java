@@ -23,7 +23,7 @@ public class FieldSpecification {
 
 
             assert query != null;
-            query.orderBy(builder.desc(root.get("field_code")));
+            query.orderBy(builder.asc(root.get("field_code")));
 
             return predicate;
         };

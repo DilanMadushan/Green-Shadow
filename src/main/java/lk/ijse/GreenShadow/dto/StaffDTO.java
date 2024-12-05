@@ -32,7 +32,4 @@ public class StaffDTO {
     private String tel;
     private String email;
     private Role role;
-    private List<MonitoringLog> log;
-    private List<VehicleResavation> vehicleResavations;
-    private List<EquipmentDetails> equipmentDetails;
 }

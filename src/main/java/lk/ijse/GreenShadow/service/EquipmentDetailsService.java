@@ -8,5 +8,5 @@ import java.util.List;
 public interface EquipmentDetailsService {
     void saveEquipmentdetailsDto(EquipmentDetilaisDTO equipmentDetilaisDTO);
     List<EquipmentDetilaisDTO> getAllEquipment(FilterEquipmentDetailsDTO filterEquipmentDetailsDTO);
-
+    String findLastIndex();
 }

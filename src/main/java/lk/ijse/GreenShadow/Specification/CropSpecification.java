@@ -25,7 +25,7 @@ public class CropSpecification {
             }
 
             assert query != null;
-            query.orderBy(builder.desc(root.get("crop_code")));
+            query.orderBy(builder.asc(root.get("crop_code")));
 
             return predicate;
         };

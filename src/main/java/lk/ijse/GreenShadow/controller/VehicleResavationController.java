@@ -60,4 +60,9 @@ public class VehicleResavationController {
         );
         return vehicleResavationService.getAllResavation(filterVehicleResavationDTO);
     }
+
+    @GetMapping("last")
+    public String findLastIndex(){
+        return vehicleResavationService.findLastIndex();
+    }
 }

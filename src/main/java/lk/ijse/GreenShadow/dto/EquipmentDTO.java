@@ -20,5 +20,4 @@ public class EquipmentDTO {
     private String name;
     private EquipmentType type;
     private EquipmentStatus status;
-    private List<EquipmentDetails> equipmentDetails;
 }

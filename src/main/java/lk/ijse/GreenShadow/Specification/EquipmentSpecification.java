@@ -36,7 +36,7 @@ public class EquipmentSpecification {
 
 
             assert query != null;
-            query.orderBy(builder.desc(root.get("equipment_Id")));
+            query.orderBy(builder.asc(root.get("equipment_Id")));
 
             return predicate;
         };

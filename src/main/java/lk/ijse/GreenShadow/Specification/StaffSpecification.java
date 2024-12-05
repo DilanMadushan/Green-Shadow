@@ -47,7 +47,7 @@ public class StaffSpecification {
 
 
             assert query != null;
-            query.orderBy(builder.desc(root.get("staff_id")));
+            query.orderBy(builder.asc(root.get("staff_id")));
 
             return predicate;
         };

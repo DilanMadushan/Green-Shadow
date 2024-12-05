@@ -56,4 +56,9 @@ public class VehicleResavationServiceImpl implements VehicleResavationService {
         }
         return vehicles;
     }
+
+    @Override
+    public String findLastIndex() {
+        return vehicleResavationRepo.findLastIndex();
+    }
 }
