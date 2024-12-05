@@ -24,7 +24,7 @@ public class AuthonticationService {
     private final Map map;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final AuthenticationManager authenticationManager;;
+    private final AuthenticationManager authenticationManager;
     public JWTAuthResponse signUp(UserDto signUp) {
         signUp.setPassword(passwordEncoder.encode(signUp.getPassword()));
         User user = map.toUserEntity(signUp);

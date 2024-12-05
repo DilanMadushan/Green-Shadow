@@ -17,11 +17,15 @@ public class CropSpecification {
                 Expression<String> commonNameExpression = builder.lower(root.get("common_name"));
                 Expression<String> scientificNameExpression = builder.lower(root.get("scientific_name"));
                 Expression<String> catagaryExpression = builder.lower(root.get("category"));
+                Expression<String> seasonExpression = builder.lower(root.get("crop_season"));
+                Expression<String> fieldExpresion = builder.lower(root.get("field").get("field_code"));
                 String lowerSearchTerm = filterCropDto.getData().toLowerCase();
                 predicate = builder.and(predicate, builder.or(builder.like(codeExpression,"%" + lowerSearchTerm + "%"),
                         builder.like(commonNameExpression,"%" + lowerSearchTerm + "%"),
                         builder.like(scientificNameExpression,"%" + lowerSearchTerm + "%"),
-                        builder.like(catagaryExpression,"%" + lowerSearchTerm + "%")));
+                        builder.like(catagaryExpression,"%" + lowerSearchTerm + "%"),
+                        builder.like(seasonExpression,"%" + lowerSearchTerm + "%"),
+                        builder.like(fieldExpresion,"%" + lowerSearchTerm + "%")));
             }
 
             assert query != null;
