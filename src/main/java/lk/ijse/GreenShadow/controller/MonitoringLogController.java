@@ -6,6 +6,8 @@ import lk.ijse.GreenShadow.service.MonitoringLogService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MonitoringLogController {
     private final MonitoringLogService monitoringLogService;
+    private static final Logger logger = LoggerFactory.getLogger(CropController.class);
     @GetMapping("health")
     public String helthChack(){
         return "All systems are running optimally";
@@ -32,10 +35,10 @@ public class MonitoringLogController {
             monitoringLogService.saveMonitoringLogDetail(monitoringLogDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (AlradyExsistException e){
-            e.printStackTrace();
+            logger.error("Save Log : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Save Log : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -48,10 +51,10 @@ public class MonitoringLogController {
             monitoringLogService.updateMonitoringLogDetail(monitoringLogDTO);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (NotFoundException e){
-            e.printStackTrace();
+            logger.error("Update Log : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Update Log : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -63,10 +66,10 @@ public class MonitoringLogController {
             monitoringLogService.deleteMonitoringLogDetail(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (NotFoundException e){
-            e.printStackTrace();
+            logger.error("Delete Log : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Delete Log : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -76,7 +79,7 @@ public class MonitoringLogController {
     public List<MonitoringLogDTO> getAllMoniteringLog(
             @RequestParam(required = false) String data,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int perPage
+            @RequestParam(defaultValue = "100") int perPage
     ){
         FilterMonitoringLodDTO filterMonitoringLodDTO = new FilterMonitoringLodDTO(data,page,perPage);
         return monitoringLogService.getAllMonitoringLog(filterMonitoringLodDTO);

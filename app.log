@@ -1,0 +1,54 @@
+11:18:05.878 [http-nio-8080-exec-3] ERROR l.i.G.controller.CropController -- Save Crop : Crop Alrady Exsist
+11:25:25.297 [main] WARN  org.hibernate.orm.deprecation -- HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+11:25:25.299 [main] WARN  org.hibernate.orm.deprecation -- HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+11:25:27.168 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+11:26:42.627 [main] WARN  org.hibernate.orm.deprecation -- HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+
+11:26:42.629 [main] WARN  org.hibernate.orm.deprecation -- HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+
+11:26:44.123 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+11:26:59.989 [main] WARN  org.hibernate.orm.deprecation -- HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+
+11:26:59.991 [main] WARN  org.hibernate.orm.deprecation -- HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+
+11:27:01.632 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+11:27:05.918 [http-nio-8080-exec-1] ERROR l.i.G.controller.CropController -- Save Crop : Crop Alrady Exsist
+
+11:35:47.155 [main] WARN  org.hibernate.orm.deprecation -- HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+
+11:35:47.157 [main] WARN  org.hibernate.orm.deprecation -- HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+
+11:35:48.679 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+11:39:23.826 [main] WARN  org.hibernate.orm.deprecation -- HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+
+11:39:23.828 [main] WARN  org.hibernate.orm.deprecation -- HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+
+11:39:25.392 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+11:40:58.983 [main] WARN  org.hibernate.orm.deprecation -- HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+
+11:40:58.985 [main] WARN  org.hibernate.orm.deprecation -- HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+
+11:41:00.486 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration -- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+11:42:08.475 [http-nio-8080-exec-6] WARN  o.h.e.jdbc.spi.SqlExceptionHelper -- SQL Error: 1451, SQLState: 23000
+
+11:42:08.475 [http-nio-8080-exec-6] ERROR o.h.e.jdbc.spi.SqlExceptionHelper -- Cannot delete or update a parent row: a foreign key constraint fails (`green-shadow`.`moniteringlog`, CONSTRAINT `FKbx77bxl10qawfyhnosr7t0wub` FOREIGN KEY (`crop_code`) REFERENCES `crop` (`crop_code`))
+
+11:42:08.480 [http-nio-8080-exec-6] ERROR l.i.G.controller.CropController -- delete Crop : could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`green-shadow`.`moniteringlog`, CONSTRAINT `FKbx77bxl10qawfyhnosr7t0wub` FOREIGN KEY (`crop_code`) REFERENCES `crop` (`crop_code`))] [delete from crop where crop_code=?]; SQL [delete from crop where crop_code=?]; constraint [null]
+
+11:42:15.775 [http-nio-8080-exec-7] WARN  o.h.e.jdbc.spi.SqlExceptionHelper -- SQL Error: 1451, SQLState: 23000
+
+11:42:15.775 [http-nio-8080-exec-7] ERROR o.h.e.jdbc.spi.SqlExceptionHelper -- Cannot delete or update a parent row: a foreign key constraint fails (`green-shadow`.`moniteringlog`, CONSTRAINT `FKbx77bxl10qawfyhnosr7t0wub` FOREIGN KEY (`crop_code`) REFERENCES `crop` (`crop_code`))
+
+11:42:15.777 [http-nio-8080-exec-7] ERROR l.i.G.controller.CropController -- delete Crop : could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`green-shadow`.`moniteringlog`, CONSTRAINT `FKbx77bxl10qawfyhnosr7t0wub` FOREIGN KEY (`crop_code`) REFERENCES `crop` (`crop_code`))] [delete from crop where crop_code=?]; SQL [delete from crop where crop_code=?]; constraint [null]
+
+11:42:18.916 [http-nio-8080-exec-9] WARN  o.h.e.jdbc.spi.SqlExceptionHelper -- SQL Error: 1451, SQLState: 23000
+
+11:42:18.916 [http-nio-8080-exec-9] ERROR o.h.e.jdbc.spi.SqlExceptionHelper -- Cannot delete or update a parent row: a foreign key constraint fails (`green-shadow`.`moniteringlog`, CONSTRAINT `FKbx77bxl10qawfyhnosr7t0wub` FOREIGN KEY (`crop_code`) REFERENCES `crop` (`crop_code`))
+
+11:42:18.918 [http-nio-8080-exec-9] ERROR l.i.G.controller.CropController -- delete Crop : could not execute statement [Cannot delete or update a parent row: a foreign key constraint fails (`green-shadow`.`moniteringlog`, CONSTRAINT `FKbx77bxl10qawfyhnosr7t0wub` FOREIGN KEY (`crop_code`) REFERENCES `crop` (`crop_code`))] [delete from crop where crop_code=?]; SQL [delete from crop where crop_code=?]; constraint [null]
+

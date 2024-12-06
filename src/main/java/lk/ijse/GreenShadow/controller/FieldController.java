@@ -6,6 +6,8 @@ import lk.ijse.GreenShadow.service.FieldService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FieldController {
     private final FieldService fieldService;
+    private static final Logger logger = LoggerFactory.getLogger(CropController.class);
     @GetMapping("/health")
     public String healthCheck(){
         return "All systems are running optimally";
@@ -32,10 +35,10 @@ public class FieldController {
             fieldService.saveField(fieldDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (AlradyExsistException e){
-            e.printStackTrace();
+            logger.error("save Field : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("save Field : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -48,10 +51,10 @@ public class FieldController {
             fieldService.deleteField(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (NotFoundException e){
-            e.printStackTrace();
+            logger.error("Delete Field : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("Delete Field : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -63,10 +66,10 @@ public class FieldController {
             fieldService.updateField(fieldDTO);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (NotFoundException e){
-            e.printStackTrace();
+            logger.error("Delete Field : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Delete Field : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -77,7 +80,7 @@ public class FieldController {
     public List<FieldDTO> getAllFields(
             @RequestParam(required = false) String data,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int perPage
+            @RequestParam(defaultValue = "100") int perPage
     ){
         FilterFieldDTO filterFieldDto = new FilterFieldDTO(data,page,perPage);
         return fieldService.getAllField(filterFieldDto);

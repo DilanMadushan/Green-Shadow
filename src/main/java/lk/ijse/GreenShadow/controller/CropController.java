@@ -8,6 +8,8 @@ import lk.ijse.GreenShadow.util.enums.Category;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CropController {
     private final CropService cropService;
+    private static final Logger logger = LoggerFactory.getLogger(CropController.class);
     @GetMapping("health")
     public String helthChack(){
         return "All systems are running optimally";
@@ -33,10 +36,10 @@ public class CropController {
             return new ResponseEntity<>(HttpStatus.CREATED);
 
         }catch (AlradyExsistException e){
-          e.printStackTrace();
+          logger.error("Save Crop : "+e.getMessage());
           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e){
-            e.printStackTrace();
+            logger.error("Save Crop : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -48,10 +51,10 @@ public class CropController {
             cropService.updateCrop(cropDTO);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (NotFoundException e){
-            e.printStackTrace();
+            logger.error("update Crop : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e){
-            e.printStackTrace();
+            logger.error("update Crop : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -62,10 +65,10 @@ public class CropController {
             cropService.deleteCrop(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (NotFoundException e){
-            e.printStackTrace();
+            logger.error("delete Crop : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e){
-            e.printStackTrace();
+            logger.error("delete Crop : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -75,7 +78,7 @@ public class CropController {
             @RequestParam(required = false) String data,
             @RequestParam(required = false) Category category,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int perPage
+            @RequestParam(defaultValue = "100") int perPage
             ){
         FilterCropDTO filterCropDto = new FilterCropDTO(data,category,page,perPage);
         return cropService.getAllCrop(filterCropDto);

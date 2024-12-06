@@ -6,6 +6,8 @@ import lk.ijse.GreenShadow.service.EqupimentService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EquipmentController {
     private final EqupimentService equpimentService;
+    private static final Logger logger = LoggerFactory.getLogger(CropController.class);
     @GetMapping("/health")
     public String healthCheack(){
         return "All systems are running optimally";
@@ -31,10 +34,10 @@ public class EquipmentController {
             equpimentService.saveEqupiment(equipmentDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (AlradyExsistException e){
-            e.printStackTrace();
+            logger.error("save Equipment : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("save Equipment : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -46,10 +49,10 @@ public class EquipmentController {
             equpimentService.updateEqupiment(equipmentDTO);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (NotFoundException e){
-            e.printStackTrace();
+            logger.error("update Equipment : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("update Equipment : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -61,10 +64,10 @@ public class EquipmentController {
             equpimentService.deleteEqupiment(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (NotFoundException e){
-            e.printStackTrace();
+            logger.error("delete Equipment : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("delete Equipment : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -74,7 +77,7 @@ public class EquipmentController {
     public List<EquipmentDTO> getAllEquipment(
             @RequestParam(required = false) String data,
             @RequestParam(defaultValue = "0")int page,
-            @RequestParam(defaultValue = "10")int perPage
+            @RequestParam(defaultValue = "100")int perPage
     ){
         FilterEquipmentDTO filterEquipmentDTO = new FilterEquipmentDTO(data,page,perPage);
         return equpimentService.getALlEqupiment(filterEquipmentDTO);

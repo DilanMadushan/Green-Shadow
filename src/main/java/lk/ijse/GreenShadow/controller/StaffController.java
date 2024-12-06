@@ -6,6 +6,8 @@ import lk.ijse.GreenShadow.service.StaffService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StaffController {
     private final StaffService staffService;
+    private static final Logger logger = LoggerFactory.getLogger(CropController.class);
     @GetMapping("/health")
     public String healthCheask(){
         return "All systems are running optimally";
@@ -30,10 +33,10 @@ public class StaffController {
             staffService.saveStaff(staffDto);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (AlradyExsistException e){
-            e.printStackTrace();
+            logger.error("Save Staff : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Save Staff : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -45,10 +48,10 @@ public class StaffController {
             staffService.updateStaff(staffDto);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (NotFoundException e){
-            e.printStackTrace();
+            logger.error("Update Staff : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Update Staff : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -60,10 +63,10 @@ public class StaffController {
             staffService.deleteStaff(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (NotFoundException e){
-            e.printStackTrace();
+            logger.error("Delete Staff : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Delete Staff : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -73,7 +76,7 @@ public class StaffController {
     public List<StaffDTO> getAllStuff(
             @RequestParam(required = false) String data,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int perPage
+            @RequestParam(defaultValue = "100") int perPage
     ){
         FilterStuffDTO filterStuffDto = new FilterStuffDTO(data,page,perPage);
         return staffService.getAllStaff(filterStuffDto);

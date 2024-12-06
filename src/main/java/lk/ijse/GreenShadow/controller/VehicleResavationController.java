@@ -8,6 +8,8 @@ import lk.ijse.GreenShadow.util.enums.ResavationType;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VehicleResavationController {
     private final VehicleResavationService vehicleResavationService;
+    private static final Logger logger = LoggerFactory.getLogger(CropController.class);
     @GetMapping("health")
     public String helthChack(){
         return "All systems are running optimally";
@@ -33,7 +36,7 @@ public class VehicleResavationController {
             vehicleResavationService.saveResavation(vehicleResavationDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (AlradyExsistException e){
-            e.printStackTrace();
+            logger.error("Save Vehicle Resavation : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }catch (NotFoundException e){
             e.printStackTrace();
@@ -50,7 +53,7 @@ public class VehicleResavationController {
             @RequestParam(required = false)String data,
             @RequestParam(required = false) ResavationType type,
             @RequestParam(defaultValue = "0")int page,
-            @RequestParam(defaultValue = "10")int perPage
+            @RequestParam(defaultValue = "100")int perPage
     ){
         FilterVehicleResavationDTO filterVehicleResavationDTO =new FilterVehicleResavationDTO(
                 data,

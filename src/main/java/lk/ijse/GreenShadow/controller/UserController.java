@@ -6,6 +6,8 @@ import lk.ijse.GreenShadow.service.UserService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private static final Logger logger = LoggerFactory.getLogger(CropController.class);
     @GetMapping("health")
     public String healthCheack(){
         return "All systems are running optimally";
@@ -29,10 +32,10 @@ public class UserController {
             userService.saveUser(userDto);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (AlradyExsistException e){
-            e.printStackTrace();
+            logger.error("Save User : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Save User : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -43,10 +46,10 @@ public class UserController {
             userService.updateUser(userDto);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (NotFoundException e){
-            e.printStackTrace();
+            logger.error("Update User : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Update User : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -56,10 +59,10 @@ public class UserController {
             userService.deleteUser(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (NotFoundException e){
-            e.printStackTrace();
+            logger.error("Delete User : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Delete User : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -68,7 +71,7 @@ public class UserController {
     public ResponseEntity<?> getAllUser(
             @RequestParam(required = false) String data,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int perPage
+            @RequestParam(defaultValue = "100") int perPage
     ){
 
         FilterUserDto filterUserDto =new FilterUserDto(data, page, perPage);

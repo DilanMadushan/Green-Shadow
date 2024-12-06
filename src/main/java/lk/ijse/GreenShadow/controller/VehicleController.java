@@ -7,6 +7,8 @@ import lk.ijse.GreenShadow.service.VehicleService;
 import lk.ijse.GreenShadow.util.exception.AlradyExsistException;
 import lk.ijse.GreenShadow.util.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VehicleController{
     private final VehicleService vehicleService;
+    private static final Logger logger = LoggerFactory.getLogger(CropController.class);
 
     @GetMapping("/health")
     public String vehicaleHealthCheack(){
@@ -35,10 +38,10 @@ public class VehicleController{
             vehicleService.saveVehicle(vehicleDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (AlradyExsistException e){
-            e.printStackTrace();
+            logger.error("Save Vehicle : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Save Vehicle : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -50,10 +53,10 @@ public class VehicleController{
             vehicleService.updateVehicle(vehicleDTO);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (NotFoundException e){
-            e.printStackTrace();
+            logger.error("Update Vehicle : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Update Vehicle : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -65,10 +68,10 @@ public class VehicleController{
             vehicleService.deleteVehicle(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (NotFoundException e){
-            e.printStackTrace();
+            logger.error("Delete Vehicle : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Delete Vehicle : "+e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -79,7 +82,7 @@ public class VehicleController{
     public List<VehicleDTO> gelALlVehicle(
             @RequestParam(required = false) String data,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int perPage
+            @RequestParam(defaultValue = "100") int perPage
     ){
         FilterVehicleDTO filterVehicleDTO = new FilterVehicleDTO(data,page,perPage);
         return vehicleService.getAllVehicles(filterVehicleDTO);
